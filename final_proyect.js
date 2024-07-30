@@ -4,16 +4,11 @@
 
 function manageOrdered(name,age,orderQuantity,unitPrice,paymentMethod, hour) {
     greetConsumer(name)
-    console.log(greetConsumer(name))
     isMayor(age)
-    calculateTotalCost(orderQuantity,unitPrice)
     let totalValue = calculateTotalCost(orderQuantity,unitPrice)
-    determineAgeDiscount(age)
     let ageDiscount = determineAgeDiscount(age)
-    determineDiscountByPaymentMethod(paymentMethod)
     let cashDiscount = determineDiscountByPaymentMethod(paymentMethod)
     showOrderTime(hour)
-    calculateValueCovered(cashDiscount,ageDiscount,totalValue)
     let coveredValue = calculateValueCovered(cashDiscount,ageDiscount,totalValue)
     showOrderSummary(totalValue, ageDiscount, cashDiscount,coveredValue)
 }
