@@ -1,28 +1,25 @@
 
-// Mostrar el resumen del pedido: Usar console.log para mostrar todos los detalles del pedido, incluyendo el costo total, el descuento aplicado, el impuesto, y el costo final.
-
-
-function manageOrdered(name,age,orderQuantity,unitPrice,paymentMethod, hour) {
+function manageOrdered(name,age,orderQuantity,unitPrice,paymentMethod) {
     greetConsumer(name)
     isMayor(age)
     let totalValue = calculateTotalCost(orderQuantity,unitPrice)
     let ageDiscount = determineAgeDiscount(age)
     let cashDiscount = determineDiscountByPaymentMethod(paymentMethod)
-    showOrderTime(hour)
+    showOrderTime()
     let coveredValue = calculateValueCovered(cashDiscount,ageDiscount,totalValue)
     showOrderSummary(totalValue, ageDiscount, cashDiscount,coveredValue)
 }
 manageOrdered("Lucas", 17, 2, 500, "Efectivo", 12)
 
 function greetConsumer(name){
-    return `Hola ${name}, bienvenido a Gm2, sera un gusto trabajar juntos!`
+    console.log( `Hola ${name}, bienvenido a Gm2, sera un gusto trabajar juntos!`)
 }
 
 function isMayor(age) {
     if (age < 18) {
         console.warn("No puede beber bebidas alcoholicas")
     } else {
-        return "Es mayor de edad"
+        console.log( "Es mayor de edad")
     }
 }
 
@@ -46,9 +43,16 @@ function determineDiscountByPaymentMethod(paymentMethod) {
     }
 }
 
-function showOrderTime(hour) {
-    if (hour >= 12 && hour <= 12) {
-        return "Puede haber demoras, ya que el pedido se hizo en hour pico"
+function showOrderTime() {
+    let now = new Date()
+    let hours = now.getHours()
+    let minutes = now.getMinutes()
+    if (hours >= 12 && hours <= 14 ) {
+        if (hours === 14 && minutes === 0) {
+            console.log( "Puede haber demoras, ya que el pedido se hizo en hora pico")
+        } else if (hours < 14) {
+            console.log( "Puede haber demoras, ya que el pedido se hizo en hora pico")
+        }
     }
 }
 
