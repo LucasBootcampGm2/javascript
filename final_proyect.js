@@ -7,9 +7,10 @@ function manageOrdered(name,age,orderQuantity,unitPrice,paymentMethod) {
     let cashDiscount = determineDiscountByPaymentMethod(paymentMethod)
     showOrderTime()
     let coveredValue = calculateValueCovered(cashDiscount,ageDiscount,totalValue)
-    showOrderSummary(totalValue, ageDiscount, cashDiscount,coveredValue)
+    let tax = calculateTax(coveredValue)
+    showOrderSummary(totalValue, ageDiscount, cashDiscount,coveredValue,tax)
 }
-manageOrdered("Lucas", 17, 2, 500, "Efectivo", 12)
+manageOrdered("Lucas", 66, 2, 500, "Efectivo")
 
 function greetConsumer(name){
     console.log( `Hola ${name}, bienvenido a Gm2, sera un gusto trabajar juntos!`)
@@ -60,15 +61,18 @@ function calculateValueCovered(cashDiscount,ageDiscount,totalValue) {
     let coveredValue = totalValue
     coveredValue  -= totalValue * cashDiscount 
     coveredValue -= totalValue * ageDiscount
-    coveredValue += coveredValue * 0.05
     return coveredValue
 }
 
-function showOrderSummary(totalValue, ageDiscount, cashDiscount,coveredValue){
+function calculateTax(coveredValue){
+    return coveredValue * 0.05
+}
+
+function showOrderSummary(totalValue, ageDiscount, cashDiscount,coveredValue,tax){
     console.log(`Costo total = ${totalValue}`)
     console.log(`Descuento aplicado = ${ageDiscount + cashDiscount}`)
-    console.log(`Impuesto = ${coveredValue = coveredValue - (coveredValue  * 0.05)}`)
-    console.log(`Costo final = ${coveredValue}`)
+    console.log(`Impuesto = ${tax}`)
+    console.log(`Costo final = ${coveredValue + tax}`)
 }
 
 
