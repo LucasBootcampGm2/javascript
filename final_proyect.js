@@ -17,7 +17,7 @@ function manageOrdered() {
 manageOrdered();
 
 function greetConsumer() {
-  let name = window.prompt("Enter your name");
+  let name = window.prompt("Enter your name").trim();
   let isNameValid = isNaN(parseFloat(name)) && name.trim().length <= 30;
   while (!isNameValid) {
     name = window.prompt("Enter your name, (30 characters max)");
@@ -29,7 +29,7 @@ function greetConsumer() {
 }
 
 function isOlder() {
-  let age = window.prompt("How old are you?");
+  let age = window.prompt("How old are you?").trim();
   while (isNaN(age) || age > 120 || age < 0) {
     age = window.prompt(
       "Enter your age,(may have more than 0 and less than 120)."
@@ -44,14 +44,13 @@ function isOlder() {
 }
 
 function haveStockOrNot() {
-  let product = window.prompt("What product will you buy?").toLowerCase();
+  let product = window.prompt("What product will you buy?").toLowerCase().trim();
   let haveStock =
     product != "orange" && product != "chicken" && product != "tomato";
   while (haveStock) {
     product = window.prompt(
       "Enter other product, we dont have that one (orange,chicken,tomato)."
-    );
-    product = product.toLowerCase();
+    ).toLowerCase().trim();
     haveStock =
       product != "orange" && product != "chicken" && product != "tomato";
   }
@@ -60,7 +59,7 @@ function haveStockOrNot() {
 }
 
 function calculateTotalCost(product) {
-  let orderQuantity = window.prompt(`How much ${product} will you want?`);
+  let orderQuantity = window.prompt(`How much ${product} will you want?`).trim();
   while (isNaN(orderQuantity)) {
     orderQuantity = window.prompt(`How much ${product} will you want?`);
 
@@ -88,7 +87,7 @@ function determineAgeDiscount(age) {
 }
 
 function determineDiscountByPaymentMethod() {
-  let paymentMethod = window.prompt("How will you pay?").toLowerCase();
+  let paymentMethod = window.prompt("How will you pay?").toLowerCase().trim();
   let isPaymentMethodValid =
     paymentMethod != "cash" &&
     paymentMethod != "card" &&
