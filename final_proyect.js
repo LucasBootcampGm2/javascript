@@ -20,7 +20,7 @@ function greetConsumer() {
   let name = window.prompt("Enter your name").trim();
   let isNameValid = isNaN(parseFloat(name)) && name.trim().length <= 30;
   while (!isNameValid) {
-    name = window.prompt("Enter your name, (30 characters max)");
+    name = window.prompt("Enter your name, (30 characters max)").trim();
     isNameValid = isNaN(parseFloat(name)) && name.trim().length <= 30;
   }
   console.log(
@@ -33,7 +33,7 @@ function isOlder() {
   while (isNaN(age) || age > 120 || age < 0) {
     age = window.prompt(
       "Enter your age,(may have more than 0 and less than 120)."
-    );
+    ).trim();
   }
   if (age < 18) {
     console.warn("You cannot drink alcoholic beverages.");
@@ -61,7 +61,7 @@ function haveStockOrNot() {
 function calculateTotalCost(product) {
   let orderQuantity = window.prompt(`How much ${product} will you want?`).trim();
   while (isNaN(orderQuantity)) {
-    orderQuantity = window.prompt(`How much ${product} will you want?`);
+    orderQuantity = window.prompt(`How much ${product} will you want?`).trim();
 
   }
   let unitPrice;
@@ -93,8 +93,7 @@ function determineDiscountByPaymentMethod() {
     paymentMethod != "card" &&
     paymentMethod != "transfer";
   while (isPaymentMethodValid) {
-    paymentMethod = window.prompt("How will you pay?");
-    paymentMethod = paymentMethod.toLowerCase();
+    paymentMethod = window.prompt("How will you pay?").toLowerCase().prompt();
     isPaymentMethodValid =
     paymentMethod != "cash" &&
     paymentMethod != "card" &&
