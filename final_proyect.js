@@ -18,9 +18,10 @@ manageOrdered();
 
 function greetConsumer() {
   let name = window.prompt("Enter your name");
-  const isNameValid = isNaN(parseFloat(name)) && name.trim().length <= 30;
+  let isNameValid = isNaN(parseFloat(name)) && name.trim().length <= 30;
   while (!isNameValid) {
     name = window.prompt("Enter your name, (30 characters max)");
+    isNameValid = isNaN(parseFloat(name)) && name.trim().length <= 30;
   }
   console.log(
     `Hi ${name}, welcome to Gm2, it will be a pleasure to work with you!`
@@ -60,6 +61,10 @@ function haveStockOrNot() {
 
 function calculateTotalCost(product) {
   let orderQuantity = window.prompt(`How much ${product} will you want?`);
+  while (isNaN(orderQuantity)) {
+    orderQuantity = window.prompt(`How much ${product} will you want?`);
+
+  }
   let unitPrice;
   switch (product) {
     case "orange":
@@ -91,6 +96,10 @@ function determineDiscountByPaymentMethod() {
   while (isPaymentMethodValid) {
     paymentMethod = window.prompt("How will you pay?");
     paymentMethod = paymentMethod.toLowerCase();
+    isPaymentMethodValid =
+    paymentMethod != "cash" &&
+    paymentMethod != "card" &&
+    paymentMethod != "transfer";
   }
   if (paymentMethod === "cash") {
     return 0.1;
