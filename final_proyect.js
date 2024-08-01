@@ -84,7 +84,7 @@ function determineDiscountByPaymentMethod(paymentMethod) {
         paymentMethod = paymentMethod.toLowerCase()
 
     }
-    if (paymentMethod === "Efectivo") {
+    if (paymentMethod === "cash") {
         return 0.1
     } else {
         return 0
@@ -97,9 +97,9 @@ function showOrderTime() {
     let minutes = now.getMinutes()
     if (hours >= 12 && hours <= 14 ) {
         if (hours === 14 && minutes === 0) {
-            console.log( "Puede haber demoras, ya que el pedido se hizo en hora pico")
+            console.log( "There may be delays as the order was placed during peak hours.")
         } else if (hours < 14) {
-            console.log( "Puede haber demoras, ya que el pedido se hizo en hora pico")
+            console.log( "There may be delays as the order was placed during peak hours.")
         }
     }
 }
