@@ -25,7 +25,7 @@ function haveAgeKey(characterObject) {
     if(characterObject.Age){
         return characterObject.Age + 1
     } else {
-        return false
+        return 'La propiedad edad no existe'
     }
 }
 console.log(haveAgeKey(character))
@@ -81,6 +81,7 @@ function characterNameAndAge(characterObject) {
         Age : characterObject.Age
     }
 }
+console.log(characterNameAndAge(character))
 
 // 10. Añade una propiedad Habilidades que sea un array de habilidades del personaje y accede a ese array por medio de notación de punto o corchetes.
 character.Skills = ['Creation', 'Destruction']
@@ -89,8 +90,12 @@ console.log(character['Skills'][0])
 
 // 11. Crea una función que reciba una habilidad y la agregue al array Habilidades.
 function addSkill(characterObject, skill) {
-    characterObject.Skills.push(skill)
-    return characterObject.Skills
+    if (typeof(skill) === 'string' ){
+        characterObject.Skills.push(skill)
+        return characterObject.Skills
+    } else {
+        return 'The skill must be a string'
+    }
 }
 console.log(addSkill(character,'Fire Ball'))
 
@@ -118,12 +123,16 @@ console.log(character['Allies'][2])
 
 // 15. Crea una función que reciba un aliado y lo agregue al array Aliados.
 function addAlly(characterObject,ally) {
-    let isInAllies = characterObject.Allies.includes(ally)
-    if (isInAllies) {
-        return `${ally} is already in allies list`
+    if (typeof(ally) === 'string'){
+        let isInAllies = characterObject.Allies.includes(ally)
+        if (isInAllies) {
+            return `${ally} is already in allies list`
+        } else {
+            character.Allies.push(ally)
+            return `${ally} was added to the list`
+        }
     } else {
-        character.Allies.push(ally)
-        return `${ally} was added to the list`
+        return 'The skill must be a string'
     }
 }
 console.log(addAlly(character, 'tete'))
@@ -152,7 +161,11 @@ function returnAllies(characterObject) {
 
 // 18. Crea una función que reciba un nuevo nombre de arma y actualice la propiedad Arma del objeto Personaje.
 function updateWeapon(characterObject,newWeapon) {
-    return characterObject.Weapon = newWeapon
+    if (typeof(newWeapon) === 'string'){
+        return characterObject.Weapon = newWeapon
+    } else {
+        return 'The weapon must be a string'
+    }
 }
 console.log(updateWeapon(character, 'Fire cane'))
 
