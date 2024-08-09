@@ -42,14 +42,18 @@ let resultsArray = productsInStock.map(function ([key, value]) {
 // Enunciado:
 // Tienes un objeto que representa las calificaciones de un grupo de estudiantes en un examen, con sus nombres como claves y las calificaciones como valores. Usa Object.values para contar cuántas calificaciones únicas hay.
 let grades = { Alice: 85, Bob: 75, Carol: 85, David: 90, Eve: 75 };
-let gradesValues = Object.values(grades)
 
-// for (let i = 0; i < gradesValues.length; i++){
-//     if (gradesValues[i] === gradesValues[i-1]){
-//     }
-// }
-// console.log(gradesValues.length)
-// // Resultado esperado: 3 (porque hay tres calificaciones únicas: 85, 75, 90)
+let gradesValues = Object.values(grades)
+let notRepatGrades = []
+
+gradesValues.map(function(grade){
+    if (!notRepatGrades.includes(grade)){
+        notRepatGrades.push(grade)
+    }
+})
+
+console.log(notRepatGrades)
+
 
 
 // Ejercicio 4: Calcular el total de precios
@@ -102,33 +106,66 @@ let colores = [ { nombre: "rojo", rgb: "rgb(255, 0, 0)" }, { nombre: "verde", rg
 // Debe asegurarse que la key exista
 // Retorne si existe o no el color
 function existColor(key,value){
-    if (colores[key]) {
-        if (colores[key].nombre === value){
-            return true
-        } else {
-            return false
-        }    
-    } else {
-        return false
-    }
+    return colores.some(color => color[key] === value)
 }
-console.log(existColor(0, 'rojo'))
+console.log(existColor('nombre','rojo'))
 
 // Ejercicio 8: Equipos de magos
 // // Listas de magos para cada equipo
-// Let equipo1 = ["Harry Potter", "Hermione Granger", "Ron Weasley", "Draco Malfoy", "Neville Longbottom", "Luna Lovegood", "Ginny Weasley", "Severus Snape", "Sirius Black", "Remus Lupin"];
-// Let equipo2 = ["Luna Lovegood", "Draco Malfoy", "Harry Potter", "Gilderoy Lockhart", "Sirius Black", "Albus Dumbledore", "Minerva McGonagall", "Hermione Granger", "Ron Weasley", "Rubeus Hagrid"];
+
+let equipo1 = ["Harry Potter", "Hermione Granger", "Ron Weasley", "Draco Malfoy", "Neville Longbottom", "Luna Lovegood", "Ginny Weasley", "Severus Snape", "Sirius Black", "Remus Lupin"];
+
+let equipo2 = ["Luna Lovegood", "Draco Malfoy", "Harry Potter", "Gilderoy Lockhart", "Sirius Black", "Albus Dumbledore", "Minerva McGonagall", "Hermione Granger", "Ron Weasley", "Rubeus Hagrid"];
 
 // Crear el objeto: magos contiene las dos listas bajo las propiedades equipo1 y equipo2.
+let magicians = {team1 : equipo1, team2 : equipo2} 
+console.log(magicians)
+
 // Crea una función que a partir de dos equipos:
 // Reciba por parámetros el objeto magos
 // Usa Object.values(magos) para obtener las listas de magos.
 // Devuelve un objeto con las tres listas requeridas.
 // // Resultado esperado:
 // magos { equipo1SinRepetidos: [ 'Neville Longbottom', 'Ginny Weasley', 'Severus Snape', 'Remus Lupin' ], equipo2SinRepetidos: [ 'Gilderoy Lockhart', 'Albus Dumbledore', 'Minerva McGonagall', 'Rubeus Hagrid' ], repetidos: [ 'Harry Potter', 'Hermione Granger', 'Ron Weasley', 'Draco Malfoy', 'Luna Lovegood', 'Sirius Black'] }
+
+function repeatedAndNotRepeatedMagicians(magiciansObject){
+    let magicians = Object.values(magiciansObject)
+    let teamWithoutRepeated1 = []
+    let teamWithoutRepeated2 = []
+    let repeated = []
+    magicians[0].forEach(function(magician){
+        if (magicians[1].includes(magician)) {
+            repeated.push(magician);
+        } else {
+            teamWithoutRepeated1.push(magician);
+        }
+    });
+
+    magicians[1].forEach(function(magician){
+        if (!repeated.includes(magician)) {
+            teamWithoutRepeated2.push(magician);
+        }
+    });
+
+    let object = {
+        equipo1SinRepetidos: teamWithoutRepeated1,
+        equipo2SinRepetidos: teamWithoutRepeated2,
+        repetidos: repeated
+    };
+    return object;
+}
+
+console.log(repeatedAndNotRepeatedMagicians(magicians))
 // Ejercicio 9: Filtrado por Key
-//  let studentGrades = { John: 85, Jane: 92, Jim: 78, Jill: 88 }
+let studentGrades = { John: 85, Jane: 92, Jim: 78, Jill: 88 }
 // // Resultado esperado { Jane: 92 }
 // Crear una función filterByKey que reciba por parámetros el objeto studentGrades y una key
 // Debe retornar un nuevo objeto que contenga solamente la key,valor encontrada, si no existe retornar “No se ha encontrado la key”
 // La función debe ser dinámica, es decir, debo poder pasarle cualquier valor en key
+
+function filterByKey(studentGradesObject, key){
+    let studentsKeys = Object.keys(studentGradesObject)
+    let filter = studentsKeys.filter(student => student === key)
+    return filter
+}
+console.log(filterByKey(studentGrades,'Jane'))
