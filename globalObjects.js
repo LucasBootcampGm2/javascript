@@ -164,8 +164,9 @@ let studentGrades = { John: 85, Jane: 92, Jim: 78, Jill: 88 }
 // La función debe ser dinámica, es decir, debo poder pasarle cualquier valor en key
 
 function filterByKey(studentGradesObject, key){
-    let studentsKeys = Object.keys(studentGradesObject)
-    let filter = studentsKeys.filter(student => student === key)
-    return filter
+    return studentGradesObject[key] ? {
+        [key] : studentGradesObject[key]
+    }: "Key not found"
 }
 console.log(filterByKey(studentGrades,'Jane'))
+
