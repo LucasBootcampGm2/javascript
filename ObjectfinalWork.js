@@ -64,23 +64,14 @@ function filterById(jedi, id, property, newValue) {
 console.log(filterById(jedis, 1, "name", "Jose luis"));
 
 // Se quiere obtener un array con todos los Jedi de tipo “Maestros”
-function findJedisMasters(jedis){
-    let isMaster = jedis.filter(function(jedi){
-        return jedi.level === 'Jedi Master'
-    })
-    return isMaster
-}
-console.log(findJedisMasters(jedis))
-
-
-// Se quiere obtener un array con todos los Jedi que cumplan con el nivel pasado por parámetro. Se debe verificar que el nivel sea “Padawan”, “Caballero” o “Maestro”
 function findJedisByLevel(jedis,level){
-    let isMaster = jedis.filter(function(jedi){
-        return jedi.level === level
-    })
-    return isMaster
+  let isMaster = jedis.filter(function(jedi){
+      return jedi.level === level
+  })
+  return isMaster
 }
-console.log(findJedisByLevel(jedis,'Sith'))
+console.log(findJedisByLevel(jedis,'Jedi Master'))
+
 
 // Se quieren agregar habilidades nuevas a un Jedi existente. Verificar que el jedi exista y que las habilidades nuevas no existan dentro del Jedi.
 function addSkillsToAnExistingJedi(jedis,id,newSkill){
