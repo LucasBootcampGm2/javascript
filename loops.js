@@ -86,7 +86,7 @@ console.log(sumDigits(223));
 
 // 8. Escribe una función encontrarMayor que reciba un array de números. Usa un bucle while para encontrar y mostrar el mayor número en la consola.
 function findUper(array) {
-  let i = 0;
+  let i = 1;
   let upper = array[0];
   while (i < array.length) {
     if (array[i] > array[i - 1]) {
