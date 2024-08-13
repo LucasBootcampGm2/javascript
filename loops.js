@@ -65,14 +65,13 @@ console.log(calculateFactorial(4));
 
 // 6. Crea una función cuentaRegresiva que reciba un número n. Usa un bucle do while para realizar una cuenta regresiva desde n hasta 1, mostrando cada número en la consola.
 function countDown(n) {
-  console.log(n);
   do {
-    n -= 1;
     console.log(n);
+    n -= 1;
   } while (n > 1);
   return `Caboom`;
 }
-console.log(countDown(3));
+console.log(countDown(10));
 
 // 7. Escribe una función sumarDigitos que reciba un número n. Usa un bucle while para sumar todos los dígitos de n. Muestra el resultado en la consola.
 function sumDigits(n) {
