@@ -108,12 +108,12 @@ function deleteJediById(jedis,id){
 console.log(deleteJediById(jedis, 0))
 // Se quieren comparar los niveles entre dos Jedi, devuelva un objeto con los nombres y los niveles de los Jedi, y cual de los dos es el más fuerte
 function comparedJedisByLevel(jedis,jedi1,jedi2){
-    let strongest 
+    let strongest = {}
     if ((jedis[jedi1] === 'Jedi Master' && jedis[jedi2] === 'Sith') || ((jedis[jedi1] === 'Jedi Master' && jedis[jedi2] === 'Padawan'))){
-        strongest = jedis[jedi1].name
+        strongest = {name: jedis[jedi1].name, level: jedis[jedi1].level}
         return strongest
     } else {
-        strongest = jedis[jedi2].name
+      strongest = {name: jedis[jedi2].name, level: jedis[jedi2].level}
         return strongest
     }
 }
