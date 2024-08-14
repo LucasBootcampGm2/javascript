@@ -42,16 +42,16 @@ console.log(`They make ${countTouchs(jugada)} touchs before the ball go out`)
 // Math.random() para simular si el saque fue exitoso (considerando que la probabilidad de éxito es del 30%)
 function practiceServes() {
     let random
-    let cont 
+    let count = 0
     let succesfulServes = 0
     do {
         random = Math.floor(Math.random() * 100 + 1)
         if (random > 30){
             succesfulServes++
         }
-        cont++
+        count++
     } while(succesfulServes === 0)
-    return cont
+    return count
 }
 console.log(`He did ${practiceServes()} serves before making an exit serve`)
 
@@ -90,31 +90,77 @@ function analyzePerformance(object){
 console.log(analyzePerformance(rendimientoJugadores))
 
 
-// 7. Imagina que estás desarrollando un carrito de compras para una página web. Tienes un
-// array de objetos productos, donde cada objeto representa un producto con su nombre y
-// precio. Escribe una función calcularTotal que recorra el array usando un bucle while y
-// calcule el precio total de los productos en el carrito. Muestra el total en la consola.
+// 7. Imagina que estás desarrollando un carrito de compras para una página web. Tienes un array de objetos productos, donde cada objeto representa un producto con su nombre y precio. Escribe una función calcularTotal que recorra el array usando un bucle while y calcule el precio total de los productos en el carrito. Muestra el total en la consola.
 let products = [{name: 'ball', price: 1800}, {name: 'table', price: 12200}, {name: 'palet', price: 13300}]
 function calculateTotal(array){
-    let prices = Object.values([{price}])
+    let count = 0
+    let totalPrice = 0
+    while(count < array.length) {
+        totalPrice += array[count].price
+        count++
+    } 
+    return totalPrice
 }
-// 8. Imagina que estás validando las entradas de un formulario en una página web. Tienes un
-// array datosIngresados que contiene valores que el usuario ingresó. Escribe una función
-// validarEntradas que recorra los datos usando un bucle do while para verificar que todos
-// los campos sean válidos (por ejemplo, que no estén vacíos). Si todos los campos son válidos,
-// muestra un mensaje en la consola indicando "Formulario válido", de lo contrario, muestra
-// "Formulario inválido".
-// 9. Imagina que estás manejando una sección de comentarios en una página web. Tienes un
-// array de objetos comentarios, donde cada objeto tiene un usuario y un comentario.
-// Escribe una función mostrarComentarios que recorra el array usando un bucle while y
-// muestre cada comentario en la consola.
-// 10. Imagina que estás creando una barra de progreso para una página web. La barra de
-// progreso se llena a medida que se completa una tarea. Escribe una función
-// simularProgreso que use un bucle do while para simular el avance de la barra,
-// incrementando el progreso en un 10% en cada iteración hasta que alcance el 100%. Muestra
-// el progreso en la consola en cada paso.
-// 11. Imagina que estás diseñando una función de filtrado para una tienda en línea. Tienes un
-// array de objetos productos, donde cada objeto tiene un nombre, categoría, y precio.
-// Escribe una función filtrarPorCategoria que recorra el array usando un bucle while y
-// devuelva un nuevo array con los productos que pertenecen a una categoría específica.
-// Muestra los productos filtrados en la consola.
+console.log(calculateTotal(products))
+
+// 8. Imagina que estás validando las entradas de un formulario en una página web. Tienes un array datosIngresados que contiene valores que el usuario ingresó. Escribe una función validarEntradas que recorra los datos usando un bucle do while para verificar que todos los campos sean válidos (por ejemplo, que no estén vacíos). Si todos los campos son válidos, muestra un mensaje en la consola indicando "Formulario válido", de lo contrario, muestra "Formulario inválido".
+let inputData = [undefined, "wwwe", 23, 23223322, null]
+
+function validateEntries(array){
+    let count = 0
+    do {
+        if(inputData[count] === undefined || inputData[count] === null){
+            return 'Invalid form'
+        }
+        count++
+    } while (count < array.length)
+    return 'Valid form'
+}
+console.log(validateEntries(inputData))
+
+// 9. Imagina que estás manejando una sección de comentarios en una página web. Tienes un array de objetos comentarios, donde cada objeto tiene un usuario y un comentario. Escribe una función mostrarComentarios que recorra el array usando un bucle while y muestre cada comentario en la consola.
+let comments = [{user: 'Seba', comment: 'Hi lucas, welcome to Gm2'},{user: 'Lucas', comment: 'It will be a pleasure to work with you'}]
+function showComments(array){
+    let count = 0
+    while(count < array.length){
+        console.log(`${comments[count].user}: ${comments[count].comment}`)
+        count++
+    }
+    return
+}
+showComments(comments)
+
+
+// 10. Imagina que estás creando una barra de progreso para una página web. La barra de progreso se llena a medida que se completa una tarea. Escribe una función simularProgreso que use un bucle do while para simular el avance de la barra, incrementando el progreso en un 10% en cada iteración hasta que alcance el 100%. Muestra el progreso en la consola en cada paso.
+function simularProgreso() {
+    let progress = 0;
+
+    do {
+        console.log(`Progress: ${progress}%`);
+        progress += 10;
+    } while (progress < 100);
+
+    console.log(`Progress: 100% - Task completed!`);
+}
+
+simularProgreso();
+
+
+// 11. Imagina que estás diseñando una función de filtrado para una tienda en línea. Tienes un array de objetos productos, donde cada objeto tiene un nombre, categoría, y precio. Escribe una función filtrarPorCategoria que recorra el array usando un bucle while y devuelva un nuevo array con los productos que pertenecen a una categoría específica. Muestra los productos filtrados en la consola.
+
+let products1 = [{name: 'Table', category: 'Furniture', price: 1212}, {name: 'Lamp', category: 'Furniture', price: 300},{name: 'Iphone', category: 'Appliances', price: 12000000},{name: 'Mac', category: 'Appliances', price: 12000000}]
+
+function filterProductsByCategory(array,category){
+    let count = 0
+    let newArray = []
+    while(count < array.length) {
+        if(array[count].category === category){
+            newArray.push(array[count])
+        }
+    count++
+    }
+    return newArray
+}
+
+console.log(filterProductsByCategory(products1, 'Furniture'))
+console.log(filterProductsByCategory(products1, 'Appliances'))
