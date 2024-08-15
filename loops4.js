@@ -195,6 +195,7 @@ function havePractices(object) {
   return `${object.name} has ${subjectsWithPractices} subjects with practices`;
 }
 console.log(havePractices(student));
+
 // 9. Tienes una lista de canales de TV argentinos, y quieres saber si uno de tus canales favoritos está en esa lista. Escribe una función buscarCanalFavorito que reciba un array de canales y un array de favoritos. Usa for para recorrer los canales, continue para saltar los que no están en la lista de favoritos, y break si encuentras uno de tus canales favoritos. Muestra en la consola el nombre del canal encontrado o un mensaje indicando que no está en la lista.
 
 let argentinianCanals = ["Lucas tv", "Telefe", "América TV"];
@@ -214,3 +215,32 @@ function searchFavoriteCanals(array, favoritesTv) {
 }
 
 console.log(searchFavoriteCanals(argentinianCanals, favorites));
+
+// usando el for hace una funciion que reciba un numero y me devuelva si es palindromo o no
+
+let num = 32123;
+function isPalindrome(palindrome) {
+  let string = palindrome.toString();
+  let itis = true;
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] !== string[string.length - i - 1]) {
+      itis = false;
+    }
+  }
+  return itis;
+}
+
+console.log(isPalindrome(num));
+
+// usa for para pushear todos los elementos de una array en otro
+
+let array = ["Hi", "Lucas", "Welcome"];
+let newArray = ["to", "GM2"];
+function addNewArrayElements(array, arrayWithNewElements) {
+  for (let i = 0; i < arrayWithNewElements.length; i++) {
+    array[array.length] = arrayWithNewElements[i];
+  }
+  return array;
+}
+
+console.log(addNewArrayElements(array, newArray));
