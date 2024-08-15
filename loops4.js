@@ -260,3 +260,88 @@ function calculateTotal(object) {
   return sum;
 }
 console.log(calculateTotal(teamBills));
+
+// 1. Crea una función que reciba un número como parámetro y genere la tabla de multiplicar para ese número, desde 1 hasta 10. La función debe imprimir los resultados en la consola en el formato adecuado.
+let num1 = 9;
+function multiplyTable(n) {
+  let table = [];
+  for (let i = 0; i < 10; i++) {
+    table.push(n * (i + 1));
+  }
+  return table;
+}
+console.log(multiplyTable(num1));
+
+// 2.
+let invertedMessage = "2MG ot emoclew sacul ih";
+
+function traduceInvertedMessage(message) {
+  let invertedMessage = "";
+  for (let i = message.length -1; i >= 0; i--) {
+    invertedMessage += message[i];
+  }
+  return invertedMessage;
+}
+
+console.log(traduceInvertedMessage(invertedMessage));
+
+//3. En una noche de Clash Royale con tus amigos, cada uno puntúa las jugadas más épicas. Usa una función para encontrar el puntaje más alto y coronar al “Genio Montapuercos” de la noche. La función debe aceptar un array de números, que pueden ser enteros o decimales. a) Proceso: ○ Recorrer el array de números para identificar el valor máximo. ○ Utilizar un bucle for para comparar cada número con el valor máximo encontrado hasta el momento. ○ Asegurarse de que la función maneje adecuadamente los números dentro del array, incluso si hay valores negativos o decimales. b) Salida: La salida debe ser el valor máximo encontrado en el array. Ejemplo de salida para la entrada 
+let nums = [-30, 5.3, 5.9, 2, 2]
+
+function findGreater(array){
+    let greater = 0
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] > greater) {
+            greater = array[i] 
+        }
+        
+    }
+    return greater
+}
+console.log(findGreater(nums))
+
+// 4. Como desarrollador del juego FIFA, estás añadiendo una funcionalidad para mostrar el
+// promedio de calificaciones de los jugadores usando estrellas (*) en la página web. Cada
+// estrella representará una unidad del promedio redondeado al entero más cercano, con
+// un máximo de 5 estrellas.
+// Requisitos:
+// a) Entrada:
+// ○ La función debe recibir un array de calificaciones, donde cada calificación
+// es un número entre 1 y 5. Algunos valores pueden ser null o mayores a
+// 5, y deben ser ignorados.
+// b) Proceso:
+// ○ Recorre el array de calificaciones y calcula el promedio de las
+// calificaciones válidas.
+// ○ Redondea el promedio al número entero más cercano.
+// ○ Usa un bucle for para construir una cadena de estrellas (*). La cantidad
+// de estrellas debe coincidir con el promedio redondeado, hasta un máximo
+// de 5 estrellas.
+// c) Salida:
+// ○ La salida debe ser una cadena de asteriscos (*) que representa el
+// promedio redondeado.
+// ○ Ejemplo de salida para la entrada [3, 1, 4, 5, 2]: *** (3 estrellas).
+// ○ Ejemplo de salida para la entrada [4, 3, 5, 2, 4]:**** (4
+// estrellas).
+// ○ Ejemplo de salida para la entrada [4, 6, null, 2, 4]: *** (3
+// estrellas)
+
+function calculateValidGradesProm(array){
+    let prom = 0
+    let count = 0
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] > 5 || array[i] === null) {
+            continue
+        } else {
+            prom += array[i] 
+            count++
+        }
+    }
+    let r = ''
+    for (let i = 0; i < Math.round(prom/count); i++) {
+        r += '*'
+    }
+    console.log(Math.round(prom/count))
+    return r
+}
+
+console.log(calculateValidGradesProm([2,4,2,2]))
