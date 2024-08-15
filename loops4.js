@@ -244,3 +244,19 @@ function addNewArrayElements(array, arrayWithNewElements) {
 }
 
 console.log(addNewArrayElements(array, newArray));
+
+// Imagina que sos parte del equipo de desarrollo de Boca, y tu tarea es gestionar el presupuesto del club de fútbol. Cada categoría de gasto del club, como sueldos de jugadores, mantenimiento del estadio, y costos de viajes, se representa como una propiedad en un objeto. Tu tarea es crear una función que calcule el total de todos los gastos del club utilizando un bucle for...in.
+let teamBills = {
+  salaries: 3333,
+  stadiumMaintenance: 200,
+  trips: 1000,
+};
+
+function calculateTotal(object) {
+  let sum = 0;
+  for (key in object) {
+    sum += object[key];
+  }
+  return sum;
+}
+console.log(calculateTotal(teamBills));
