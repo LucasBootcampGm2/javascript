@@ -37,7 +37,20 @@ generatePyramid(5);
 // Escribe una función encontrarElementoUnico(numeros) que encuentre y devuelva el elemento que no tiene pareja.
 // Importante: Solo pueden usar el bucle for, de lo contrario, el ejercicio esta mal
 // Ejemplo:
-// Si el array es [2, 3, 2, 5, 5, 6, 6], el número único es 3, porque es el único que no aparece en pares.
+let nums = [2, 3, 2, 5, 5, 6, 6]
+
+function findUniqueElement(array) {
+  let result = 0
+  for (let i = 0; i < array.length; i++) {
+    let nums = []
+    for (let j = i; j < array.length; j++) {
+    }
+  }
+  return nums
+}
+
+console.log(findUniqueElement(nums)); // Debería imprimir 3
+
 
 // Desafío: Crear un Array de Números en Escalera
 // Objetivo:
@@ -54,7 +67,16 @@ generatePyramid(5);
 //   [2, 2]
 //   [3, 3, 3]
 //   [4, 4, 4, 4]
-
+function createLadderAray(n) {
+  for (let i = 0; i < n; i++) {
+    let ladder = [];
+    for (let j = 0 ; j <= i; j++) {
+      ladder[j] =  i+1
+    }
+    console.log(ladder);
+  }
+}
+createLadderAray(4);
 // SISTEMA DE ESTUDIANTES
 // Inventario de Tienda con Filtrado y Agrupación por Categoría
 // Descripción:
