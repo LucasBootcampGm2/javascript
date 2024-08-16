@@ -35,21 +35,27 @@ generatePyramid(5);
 // Definir un array: El array numeros contiene enteros donde todos los elementos aparecen en pares, excepto uno que aparece solo una vez.
 // Encontrar el elemento único:
 // Escribe una función encontrarElementoUnico(numeros) que encuentre y devuelva el elemento que no tiene pareja.
-// Importante: Solo pueden usar el bucle for, de lo contrario, el ejercicio esta mal
+// Importante: Solo pueden usar el bucle for y maximo 2 if, de lo contrario, el ejercicio esta mal
 // Ejemplo:
-let nums = [2, 3, 2, 5, 5, 6, 6]
+let nums = [8, 8, 2, 5, 5, 6, 6]
 
 function findUniqueElement(array) {
-  let result = 0
   for (let i = 0; i < array.length; i++) {
-    let nums = []
-    for (let j = i; j < array.length; j++) {
+    let isUnique = true;
+    for (let j = 0; j < array.length; j++) {
+        if (i !== j && array[i] === array[j]) {
+            isUnique = false;
+            break;
+        }
+    }
+    if (isUnique) {
+        return array[i];
     }
   }
-  return nums
+  return null;
 }
 
-console.log(findUniqueElement(nums)); // Debería imprimir 3
+console.log(findUniqueElement(nums)); 
 
 
 // Desafío: Crear un Array de Números en Escalera
@@ -77,6 +83,7 @@ function createLadderAray(n) {
   }
 }
 createLadderAray(4);
+
 // SISTEMA DE ESTUDIANTES
 // Inventario de Tienda con Filtrado y Agrupación por Categoría
 // Descripción:
@@ -89,30 +96,51 @@ createLadderAray(4);
 // Filtre los productos con un valor total mayor al valor especificado.
 // Cree un objeto con el siguiente formato:
 
-// {
-//     categoria: 'Electrónica',
-//     productos: [
-//         { nombre: 'Laptop', cantidad: 4, valorTotal: 4000 },
-//         // ...otros productos
-//     ],
-//     valorTotalCategoria: X
-// }
+let products = [
+  { name: 'Laptop', amount: 4, unitePrice: 1000, category: 'Electrónica' },
+  { name: 'Teclado', amount: 10, unitePrice: 50, category: 'Electrónica' },
+  { name: 'Mouse', amount: 20, unitePrice: 25, category: 'Electrónica' },
+  { name: 'Monitor', amount: 5, unitePrice: 200, category: 'Electrónica' },
+  { name: 'Silla', amount: 10, unitePrice: 150, category: 'Muebles' },
+  { name: 'Escritorio', amount: 5, unitePrice: 300, category: 'Muebles' }
+];
 
-// Finalmente, imprima el objeto resultante.
+function generateInventoryReport(products, minValue) {
+  let report = [];
+  let groupedByCategory = {};
+  for (product of products) {
+      let { category, name, amount, unitePrice } = product;
+      let totalValue = amount * unitePrice;
 
-// Entrada :
+      if (!groupedByCategory[category]) {
+          groupedByCategory[category] = {
+              categoria: category,
+              productos: [],
+              valorTotalCategoria: 0
+          };
+      }
 
-// const productos = [
-//     { nombre: 'Laptop', cantidad: 4, precioPorUnidad: 1000, categoria: 'Electrónica' },
-//     { nombre: 'Teclado', cantidad: 10, precioPorUnidad: 50, categoria: 'Electrónica' },
-//     { nombre: 'Mouse', cantidad: 20, precioPorUnidad: 25, categoria: 'Electrónica' },
-//     { nombre: 'Monitor', cantidad: 5, precioPorUnidad: 200, categoria: 'Electrónica' },
-//     { nombre: 'Silla', cantidad: 10, precioPorUnidad: 150, categoria: 'Muebles' },
-//     { nombre: 'Escritorio', cantidad: 5, precioPorUnidad: 300, categoria: 'Muebles' }
-// ];
+      if (totalValue > minValue) {
+          groupedByCategory[category].productos.push({
+              nombre: name,
+              cantidad: amount,
+              valorTotal: totalValue
+          });
+          groupedByCategory[category].valorTotalCategoria += totalValue;
+      }
+  }
+
+  for (let category in groupedByCategory) {
+      report.push(groupedByCategory[category]);
+  }
+
+  return report;
+}
+
+let report = generateInventoryReport(products, 500);
+console.log(report);
 
 // Salida esperada:
-
 // [
 //     {
 //         categoria: 'Electrónica',
