@@ -19,4 +19,8 @@ welcome.addEventListener('mouseout', function(){
         welcome.style.color = 'black'
 })
 
+// window.addEventListener('load', function(){
+//         alert('The page is loading')
+// })
+
 
