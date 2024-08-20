@@ -92,7 +92,17 @@ countButton[0].addEventListener('click',function(){
 
 // Ejercicio 10: Validar Email en un Formulario: Selecciona un formulario con el id "email-form" y agrega un evento que valide que el campo de email contiene un formato válido antes de enviarlo.
 
+let form3 = document.getElementById('email-form')
+let inputEmail3 = document.getElementById('input-email3')
+form3.addEventListener('submit', function(event){
+    event.preventDefault()
+    if (inputEmail3.value){
+        alert('SE COMPLETO el form contactos')
+    } else {
+        alert('no completaste el formulario')
+    }
 
+})
 
 // Ejercicio 11: Evento para Mostrar/Ocultar Contenido: Selecciona un botón con el id "toggle-content" y un div con la clase "content-box", y agrega un evento que muestre o oculte el contenido del div al hacer clic.
 let toggleButton = document.getElementById('toggle-content')
@@ -178,11 +188,10 @@ createListbutton.addEventListener('click', function(){
 
 // Ejercicio 20: Cambiar el Tamaño de un elemento HTML: Selecciona un elemento con el id "resize-image" y agrega un evento que cambie su estilo.
 
-// let resizeImage = document.getElementById('resize-image')
+let resizeImage = document.getElementById('resize-image')
 
-// resizeImage.addEventListener('mouseover', function(){
-//     resizeImage.style.width = '10px'
-//     resizeImage.style.width = '10px'
-//     resizeImage.style.color = 'green'
+resizeImage.addEventListener('mouseover', function(){
+    resizeImage.style.width = '300px'
+    resizeImage.style.backgroundColor = 'green'
 
-// })
+})
