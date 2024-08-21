@@ -40,12 +40,14 @@ addItem(addButton2,list2,inputOption2)
 
 let deleteButton = document.querySelectorAll('.deleteButton')
 console.log(deleteButton)
-
-deleteButton.forEach(function(button){
-    button.addEventListener('click', function(){
-        button.parentNode.remove()
+function deleteItem(buttons){
+    buttons.forEach(function(button){
+        button.addEventListener('click', function(){
+            button.parentNode.remove()
+        })
     })
-})
+}
+deleteItem(deleteButton)
 
 
 // Add a button to toggle light/dark mode.
