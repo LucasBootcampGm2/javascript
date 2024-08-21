@@ -1,5 +1,3 @@
-let theHeader = document.querySelector('header')
-theHeader.style.display = "flex" 
 
 function addElements(element, qty, content){
     let list = document.getElementById(element)
@@ -13,4 +11,4 @@ function addElements(element, qty, content){
     return list
 }
 addElements('ul-1', 8, 'li')
-addElements('ul-2', 3, 'li')
+addElements('ul-2', 9, 'li')

@@ -4,44 +4,111 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
   </head>
-  <body id="body">
-    <header class="header" >
-        <ul id="ul-1" class="color-list">
-            
-        </ul>
-        <ul id="ul-2" class="item-list">
-            
-        </ul>
-
-        <input id="add-item" class="count-button" type="button" value="add item">
-    </header>
-    
+  <body id="body">  
+    <header class="header">
+      <h1>Ejercicios js</h1>
+    </header> 
     </main>
-        <h1 id="h1" class="main-title">Main</h2>
-        <p id="home">Hola</p>
-        <h2 class="color">Change Color with a click</h2>
-        <p class="intro warning">asas</p>
-        <div class="content">Contenido inicial</div>
-        <div class="container"> wewe</div>
-        <input id="show-message" type="button" name="btn" id="btn">
-        <a href="www.google.com"></a>
-        <input id="input-changes-p" type="text" value="text">
-        <p id="input-p-changed"></p>
-        <p class="click-text">haz click</p>
-        <input id="toggle-button" type="button" value="toggleButton">
-        <div class="content-box">CONTENT</div>
-        <a class="no-default" href="#no-default">no-default</a>
-        <input id="add-class" type="button" value="add-class">
-        <p class="text"> add class p</p>
-        <input id="toggle-text" type="button" value="tooglebutton">
-        <p class="text-toggle">text toggle</p>
-        <input id="add-html" type="button" value="add-html">
+        <h3>Add elements to a list with a js function</h3>
+        <div class="container-lists">
+          <ul id="ul-1" class="color-list"></ul>
+          <ul id="ul-2" class="item-list"></ul>
+        </div>
+
+        <div class="container-exercises">
+          <h3>add elements to a list with a button click event</h3>
+          <input id="add-item" class="count-button" type="button" value="add item"> 
+        </div>
+
+        <div class="container-exercises">
+          <h2>Change h3 color with a h3 mouseover event</h2>
+          <h3 id="welcome-h3" class="main-title">Main</h3>  
+        </div>
+
+        <div class="container-exercises">
+          <h3>Change p innerText with js</h3>
+          <p id="home">Hola</p>
+        </div>
+        
+        <div class="container-exercises">
+          <h2>Click in color to change to a random color</h2>
+          <h3 class="color">Color</h3>
+        </div>
+        
+        <div class="container-exercises">
+          <h2>Add a class with .classList.add()</h2>
+          <p class="intro warning">asas</p>
+        </div>
+
+        <div class="container-exercises">
+          <h2>Add new content to a div with innerText += </h2>
+          <div class="content">Contenido inicial</div>
+        </div>
+
+        <div class="container-exercises">
+          <div class="container"> wewe</div>
+          <input id="add-html" type="button" value="add-html">
+        </div>
+
+        <div class="container-exercises">
+          <h2>Alert Hola Mundo with click event</h2>
+          <input id="show-message" type="button" name="btn" id="btn" value="Hola Mundo">
+        </div>
+
+        <div class="container-exercises">
+          <h2>Prevent default Event with .preventDefault()</h2>
+          <a class="no-default" href="www.google.com">google</a>
+        </div>
+
+        <div class="container-exercises">
+          <h2>Change a paragraph text with a input change event</h2>
+          <input id="input-changes-p" type="text" value="text">
+          <p id="input-p-changed"></p>
+        </div>
+
+        <div class="container-exercises">
+          <input id="toggle-button" type="button" value="toggleButton">
+          <div class="content-box">CONTENT</div>
+        </div>
+
+        <div class="container-exercises">
+          <input id="add-class" type="button" value="add-class">
+          <p class="text"> add class p</p>          
+        </div>
+
+
+        <div class="container-exercises">
+          <h2>Cambiar texto a Haz click aqui</h2>
+          <p class="click-text"> hELLOOO</p>
+        </div>
+
+        <div class="container-exercises">
+          <input id="toggle-text" type="button" value="tooglebutton">
+          <p class="text-toggle">text toggle</p>
+        </div>
+        
+        <div class="container-exercises">
+          <h2>Create a new element at the end (is in the top of the html and says elemento creado)</h2>
+          <input id="create-element" type="button" value="add paragraph">
+        </div>
+        
         <div class="container"></div>
-        <input id="create-element" type="button" value="add paragraph">
-        <input type="button" value="change-color" id="change-color">
-        <input id="create-list" type="button">
+
+        <div class="container-exercises">
+          <h2>Change the color of a list at the top of the html</h2>
+          <input type="button" value="change-color" id="change-color">  
+        </div>
+
+        <div class="container-exercises">
+          <input id="create-list" type="button" value="create list">
+          <div class="list-container"></div>
+        </div>
+        
         <input id="toggle-content" type="button" value="asasas">
+        <div class="content-box2">Hola</div>
+
         <form id="signup-form">
           <input type="text" name="input-name1" id="input-name1">
           <input type="email" name="input-email1" id="input-email1">
@@ -62,9 +129,9 @@
 
     <footer id="footer">fooooter</footer>
 
-    <script src="addEventListener.js"></script>
-    <script src="querySelector-getElementById.js"></script>
-    <script src="createElement.js"></script>
-    <script src="addEventListener2.js"></script>
+    <script src="/domExercises/addEventListener.js"></script>
+    <script src="/domExercises/addEventListener2.js"></script>
+    <script src="/domExercises/createElement.js"></script>
+    <script src="/domExercises/querySelector-getElementById.js"></script>
   </body>
 </html>

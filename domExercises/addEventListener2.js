@@ -20,7 +20,7 @@ body.addEventListener("click", function () {
 // Ejercicio 3: Cambiar Texto al Hacer Clic: Selecciona un párrafo con la clase "click-text" y agrega un evento que cambie su texto a "Has hecho clic aquí".
 let paragraph = document.getElementsByClassName("click-text");
 paragraph[0].addEventListener("click", function () {
-  paragraph[0].style.color = "green";
+  paragraph[0].innerHTML = "Haz click aqui";
 });
 
 // Ejercicio 4: Cambiar el Valor de un Input al Cambiarlo: Selecciona un input de texto y crea un elemento párrafo el cual agreguemos lo que vamos escribiendo en el input.
@@ -105,15 +105,18 @@ form3.addEventListener('submit', function(event){
 })
 
 // Ejercicio 11: Evento para Mostrar/Ocultar Contenido: Selecciona un botón con el id "toggle-content" y un div con la clase "content-box", y agrega un evento que muestre o oculte el contenido del div al hacer clic.
-let toggleButton = document.getElementById('toggle-content')
-let contentbox = document.querySelector('.content-box')
 
+let toggleButton = document.getElementById('toggle-content')
+let contentBox = document.querySelector('.content-box2')
+console.log(contentBox)
+console.log('hola')
 toggleButton.addEventListener('click', function(){
-    contentbox.classList.toggle('mostrar') 
+    contentBox.classList.toggle('mostrar')
 })
 
 // Ejercicio 12: Prevenir el Comportamiento por Defecto en un Enlace: Selecciona un enlace con la clase "no-default" y agrega un evento para evitar que el enlace navegue a otra página, mostrando en su lugar un mensaje en consola.
 let link = document.querySelector('.no-default')
+
 link.addEventListener('click',function(event){
     event.preventDefault()
 })
@@ -133,11 +136,12 @@ addClassButton.addEventListener('click',function(){
 // Ejercicio 14: Alternar Contenido de Texto: Selecciona un botón con el id "toggle-text" y un párrafo con la clase "text-toggle". Agrega un evento que cambie el texto del párrafo entre "Texto 1" y "Texto 2".
 let toggleTextbutton = document.getElementById('toggle-text')
 let textToggleParagraph = document.getElementsByClassName('text-toggle')
+console.log(textToggleParagraph)
 toggleTextbutton.addEventListener('click', function(){
-    if(textToggleParagraph[0].includes('Texto 1')){
-        textToggleParagraph[0].textContent = 'Texto 2'
-    } else {
+    if(textToggleParagraph[0].innerHTML !== 'Texto 1'){
         textToggleParagraph[0].textContent = 'Texto 1'
+    } else {
+        textToggleParagraph[0].textContent = 'Texto 2'
     }
 })
 
@@ -177,14 +181,20 @@ changeColor.addEventListener('click', function(){
 
 // Ejercicio 18: Crear una Lista de Ítems Dinámicamente: Selecciona un botón con el id "create-list". Agrega un evento que cree una nueva lista ul y añada cinco elementos li dentro de ella, agregando la lista al final de un div con la clase "list-container".
 let createListbutton = document.getElementById('create-list')
-let array = [1, 2, 3 ,4]
+let array = [0, 1, 2, 3 ,4]
+let listContainer = document.querySelector('.list-container')
 createListbutton.addEventListener('click', function(){
     let newList = document.createElement('ul')
-    body.append(newList)
     for (let i = 0; i < array.length; i++) {
-        newList.append(`elemento ${array[i]}agregado`)
+        let newItem = document.createElement('li')
+        newItem.innerHTML = ` elemento ${array[i]} agregado `
+        newList.append(newItem)
     }
+    listContainer.append(newList)
+
 })
+
+
 
 // Ejercicio 20: Cambiar el Tamaño de un elemento HTML: Selecciona un elemento con el id "resize-image" y agrega un evento que cambie su estilo.
 

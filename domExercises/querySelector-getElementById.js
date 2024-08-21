@@ -5,7 +5,7 @@
 // Aplica todo lo aprendido hasta el momento. Podes investigar por tu cuenta y agregar lo que creas necesario
 // Ejercicio 1: Seleccionar un Elemento y Agregar una Clase
 // Consigna: Selecciona del DOM el elemento p que tiene la clase "intro" y agrégale una nueva clase llamada "highlight".
-let intro = document.querySelector("p.intro");
+let intro = document.querySelector(".intro");
 console.log(intro);
 
 intro.classList.add("highlight");
@@ -47,7 +47,5 @@ let x = document.querySelector('.content').innerText += 'Contenido adicional'
 
 // Ejercicio 10: Verificar y Mostrar si un Elemento Tiene una Clase
 // Consigna: Selecciona del DOM el elemento con la clase "header" y muestra en la consola si tiene la clase "sticky".
-// Con todo esto resuelto podría quedarte algo así:
 let haveClass = document.querySelector('.header') 
-
 console.log(haveClass.classList.contains('sticky'))
