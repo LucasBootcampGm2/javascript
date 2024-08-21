@@ -16,20 +16,34 @@
 
 let list1 = document.getElementById('toDoList1')
 let list2 = document.getElementById('toDoList2')
+
 let inputOption1 = document.getElementById('inputOption1')
 let inputOption2 = document.getElementById('inputOption2')
+
 let addButton1 = document.getElementById('addButton1')
 let addButton2 = document.getElementById('addButton2')
  
 function addItem(button,list,option){
     button.addEventListener('click', function(){
         let newItem = document.createElement('li')
+        let newP = document.createElement('p')
         let newDeleteButton = document.createElement('button')
+        
         newDeleteButton.textContent = 'Delete' 
         newDeleteButton.setAttribute('class', 'deleteButton') 
-        newItem.textContent = option.value
+        
+        newDeleteButton.addEventListener('click', function(){
+            newDeleteButton.parentNode.remove()
+        })
+        newP.textContent = option.value
+        
+        newItem.append(newP)
         newItem.append(newDeleteButton)
+        
+        newItem.setAttribute('class', 'list-item') 
+
         list.append(newItem)
+        option.value = null
     })
     return
 }
@@ -49,6 +63,15 @@ function deleteItem(buttons){
 }
 deleteItem(deleteButton)
 
+
+let darkBody = document.getElementById('body')
+let lightDarkButton = document.getElementById('light-dark-button')
+let darkUl = document.getElementsByTagName('ul')
+lightDarkButton.addEventListener('click', function(){
+    lightDarkButton.classList.toggle('blackChange')
+    darkBody.classList.toggle('darkBody')
+    darkUl.classList.toggle('darkUl')
+})
 
 // Add a button to toggle light/dark mode.
 // Do not duplicate html code.
