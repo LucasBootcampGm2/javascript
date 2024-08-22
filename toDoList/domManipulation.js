@@ -1,83 +1,116 @@
-// Based on Notion ToDo list style, create a web app that contains two lists side by side.
-// Each list name must be at the end of the amount of items.
-// Load an initial list of ToDos for each list when the page is loaded
-// First list
-// Buy eggs
-// Do laundry
-// Buy facturas for Seba
+let toDoList1 = ["Buy eggs", "Do laundry", "Buy facturas for Seba"];
+let toDoList2 = ["Sleep", "Eat", "Code", "Repeat"];
+let arrayOfLists = [toDoList1, toDoList2, [], []];
 
-// Second list
-// Sleep
-// Eat
-// Code
-// Repeat
+function loadItems(list, items) {
+  console.log({ list, items });
+  for (let i = 0; i < items.length; i++) {
+    let newItem = document.createElement("li");
+    newItem.setAttribute("class", "list-item");
+    list.append(newItem);
 
-// The last list item must be an empty item allowing users to add a new item to that list. It must have a button on the right side with the text “Add”
-
-let list1 = document.getElementById('toDoList1')
-let list2 = document.getElementById('toDoList2')
-
-let inputOption1 = document.getElementById('inputOption1')
-let inputOption2 = document.getElementById('inputOption2')
-
-let addButton1 = document.getElementById('addButton1')
-let addButton2 = document.getElementById('addButton2')
- 
-function addItem(button,list,option){
-    button.addEventListener('click', function(){
-        let newItem = document.createElement('li')
-        let newP = document.createElement('p')
-        let newDeleteButton = document.createElement('button')
-        
-        newDeleteButton.textContent = 'Delete' 
-        newDeleteButton.setAttribute('class', 'deleteButton') 
-        
-        newDeleteButton.addEventListener('click', function(){
-            newDeleteButton.parentNode.remove()
-        })
-        newP.textContent = option.value
-        
-        newItem.append(newP)
-        newItem.append(newDeleteButton)
-        
-        newItem.setAttribute('class', 'list-item') 
-
-        list.append(newItem)
-        option.value = null
-    })
-    return
+    let newP = document.createElement("p");
+    if (items[i].length>0){
+      newP.textContent = items[i];
+      newItem.append(newP);
+      let newDeleteButton = document.createElement("button");
+      newDeleteButton.textContent = "Delete";
+      newDeleteButton.setAttribute("class", "deleteButton");
+      newDeleteButton.addEventListener("click", function () {
+        let sure = confirm("Are you sure?");
+        if (sure) {
+          newDeleteButton.parentNode.remove();
+        }
+      });
+      newItem.append(newDeleteButton);
+    } else {
+      alert('Enter something before add')
+    }
+  }
 }
-addItem(addButton1, list1, inputOption1)
-addItem(addButton2,list2,inputOption2)
-// Allow users to delete items, with a button to the right with the text “Delete”
-// Extra: alert users to see if they are sure
 
-let deleteButton = document.querySelectorAll('.deleteButton')
-console.log(deleteButton)
-function deleteItem(buttons){
-    buttons.forEach(function(button){
-        button.addEventListener('click', function(){
-            button.parentNode.remove()
-        })
-    })
+function createContainerLists() {
+  let newContainerLists = document.createElement("div");
+  newContainerLists.setAttribute("class", "container-list");
+  main.append(newContainerLists);
+  return newContainerLists;
 }
-deleteItem(deleteButton)
 
+function createH2(idx, containerList) {
+  let newH2 = document.createElement("h2");
+  newH2.textContent = `List ${idx + 1}`;
+  containerList.append(newH2);
+  return newH2;
+}
 
-let darkBody = document.getElementById('body')
-let lightDarkButton = document.getElementById('light-dark-button')
-let darkUl = document.getElementsByTagName('ul')
-lightDarkButton.addEventListener('click', function(){
-    lightDarkButton.classList.toggle('blackChange')
-    darkBody.classList.toggle('darkBody')
-    darkUl.classList.toggle('darkUl')
-})
+function createList(containerList) {
+  let newList = document.createElement("ul");
+  newList.setAttribute("class", "list");
+  containerList.append(newList);
+  return newList;
+}
 
-// Add a button to toggle light/dark mode.
-// Do not duplicate html code.
-// Manage variable amount of lists.
-// (Do not copy from Notion, use provided snapshot as reference).
-// Tips
-// Hardcode first. Then generalize and abstract variables.
-// Start small. Then build bigger and adapt along the way
-// Ask for help! But after first trying to do it yourself, and then, understanding what is blocking you (“What is it that I don’t understand?“)
+function createContainerInputs(containerList) {
+  let newContainerInputs = document.createElement("div");
+  newContainerInputs.setAttribute("class", "container-inputs");
+  containerList.append(newContainerInputs);
+  return newContainerInputs;
+}
+
+function createInputText(idx, containerInputs) {
+  let newInputText = document.createElement("input");
+  newInputText.setAttribute("type", "text");
+  newInputText.setAttribute("class", "inputs-options");
+  newInputText.setAttribute("id", `inputOption${idx}`);
+  newInputText.setAttribute("place-holder", "Add a new item");
+  containerInputs.append(newInputText);
+  return newInputText;
+}
+
+function createAddButton(containerInputs) {
+  let newAddButton = document.createElement("button");
+  newAddButton.setAttribute("class", "addButtons");
+  newAddButton.innerText = "Add";
+  containerInputs.append(newAddButton);
+  return newAddButton;
+}
+
+function addEventToAddButtons(idx, newList) {
+  let addButtons = document.querySelectorAll(".addButtons");
+  let inputsOption = document.querySelectorAll(".inputs-options");
+
+  addButtons[idx].addEventListener("click", function () {
+    loadItems(newList, [inputsOption[idx].value]);
+    inputsOption[idx].value = ''
+  });
+  return addButtons;
+}
+
+function onAddLists(arrayOfArrays) {
+  arrayOfArrays.forEach(function (items, idx) {
+    let containerList = createContainerLists();
+    createH2(idx, containerList);
+    let newList = createList(containerList);
+    loadItems(newList, items);
+    let containerInputs = createContainerInputs(containerList);
+    createInputText(idx, containerInputs);
+    createAddButton(containerInputs);
+    addEventToAddButtons(idx, newList);
+  });
+}
+
+function darkMode() {
+  let body = document.getElementById("body");
+  let lightDarkButton = document.getElementById("light-dark-button");
+  let lists = document.getElementsByTagName("ul");
+  lightDarkButton.addEventListener("click", function () {
+    lightDarkButton.classList.toggle("blackChange");
+    body.classList.toggle("darkBody");
+    lists.classList.toggle("darkUl");
+  });
+}
+
+window.addEventListener("load", function () {
+  onAddLists(arrayOfLists);
+  darkMode();
+});
