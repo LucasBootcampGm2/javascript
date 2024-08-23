@@ -1,6 +1,15 @@
 let toDoList1 = ["Buy eggs", "Do laundry", "Buy facturas for Seba"];
 let toDoList2 = ["Sleep", "Eat", "Code", "Repeat"];
-let arrayOfLists = [toDoList1, toDoList2, [], []];
+
+let arrayOfLists = [
+  toDoList1, 
+  toDoList2, 
+  ["Sleep", "Eat", "Code", "Repeat"], 
+  ["Sleep", "Eat", "Code", "Repeat"], 
+  ["Sleep", "Eat", "Code", "Repeat"], 
+  ["Sleep", "Eat", "Code", "Repeat"], 
+  ["Sleep", "Eat", "Code", "Repeat"]
+];
 
 function loadItems(list, items) {
   console.log({ list, items });
