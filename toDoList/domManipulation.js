@@ -114,7 +114,20 @@ function onAddLists(arrayOfArrays) {
   });
 }
 
-function darkMode() {
+// function darkMode() {
+//   let body = document.getElementById("body");
+//   let lightDarkButton = document.getElementById("light-dark-button");
+//   let lists = document.getElementsByTagName("ul");
+//   lightDarkButton.addEventListener("click", function () {
+//     lightDarkButton.classList.toggle("blackChange");
+//     body.classList.toggle("darkBody");
+//     for (let list of lists) {
+//       list.classList.toggle("darkUl");
+//     }
+//   });
+// }
+
+function getDarkElements() {
   let body = document.getElementById("body");
   let lightDarkButton = document.getElementById("light-dark-button");
   let lists = document.getElementsByTagName("ul");
@@ -129,11 +142,13 @@ function darkMode() {
 
 window.addEventListener("load", function () {
   onAddLists(arrayOfLists);
-  darkMode();
-  // if (localStorage.getItem('preference') && localStorage.getItem('preference') === 'dark' ) {
-  //   body.classList.add('darkBody')
-  // } else {
-  //   localStorage.setItem('preference', 'dark')
-  //   body.classList.add('darkBody')
-  // }
+  // darkMode();
+  if (localStorage.getItem('preference') && localStorage.getItem('preference') === 'dark' ) {
+    getDarkElements()
+  } else {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+      localStorage.setItem('preference', 'dark')
+      getDarkElements()
+    }
+  }
 });
