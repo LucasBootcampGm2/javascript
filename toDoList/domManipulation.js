@@ -2,40 +2,40 @@ let toDoList1 = ["Buy eggs", "Do laundry", "Buy facturas for Seba"];
 let toDoList2 = ["Sleep", "Eat", "Code", "Repeat"];
 
 let arrayOfLists = [
-  toDoList1, 
-  toDoList2, 
-  ["Sleep", "Eat", "Code", "Repeat"], 
-  ["Sleep", "Eat", "Code", "Repeat"], 
-  ["Sleep", "Eat", "Code", "Repeat"], 
-  ["Sleep", "Eat", "Code", "Repeat"], 
-  ["Sleep", "Eat", "Code", "Repeat"]
+  toDoList1,
+  toDoList2,
+  ["Sleep", "Eat", "Code", "Repeat"],
+  ["Sleep", "Eat", "Code", "Repeat"],
+  ["Sleep", "Eat", "Code", "Repeat"],
+  ["Sleep", "Eat", "Code", "Repeat"],
+  ["Sleep", "Eat", "Code", "Repeat"],
 ];
 
-function loadItems(list, items) {
-  console.log({ list, items });
-  for (let i = 0; i < items.length; i++) {
+function loadItems(list, items, listIdx) {
+  list.innerHTML = "";
+  items.forEach((item, i) => {
     let newItem = document.createElement("li");
     newItem.setAttribute("class", "list-item");
-    list.append(newItem);
 
     let newP = document.createElement("p");
-    if (items[i].length>0){
-      newP.textContent = items[i];
-      newItem.append(newP);
-      let newDeleteButton = document.createElement("button");
-      newDeleteButton.textContent = "Delete";
-      newDeleteButton.setAttribute("class", "deleteButton");
-      newDeleteButton.addEventListener("click", function () {
-        let sure = confirm("Are you sure?");
-        if (sure) {
-          newDeleteButton.parentNode.remove();
-        }
-      });
-      newItem.append(newDeleteButton);
-    } else {
-      alert('Enter something before add')
-    }
-  }
+    newP.textContent = item;
+    newItem.append(newP);
+
+    let newDeleteButton = document.createElement("button");
+    newDeleteButton.textContent = "Delete";
+    newDeleteButton.setAttribute("class", "deleteButton");
+    newDeleteButton.addEventListener("click", function () {
+      let sure = confirm("Are you sure?");
+      if (sure) {
+        arrayOfLists[listIdx].splice(i, 1);
+        loadItems(list, arrayOfLists[listIdx], listIdx);
+        console.log(arrayOfLists[listIdx]);
+      }
+    });
+    newItem.append(newDeleteButton);
+
+    list.append(newItem);
+  });
 }
 
 function createContainerLists() {
@@ -71,7 +71,7 @@ function createInputText(idx, containerInputs) {
   newInputText.setAttribute("type", "text");
   newInputText.setAttribute("class", "inputs-options");
   newInputText.setAttribute("id", `inputOption${idx}`);
-  newInputText.setAttribute("place-holder", "Add a new item");
+  newInputText.setAttribute("placeholder", "Add a new item");
   containerInputs.append(newInputText);
   return newInputText;
 }
@@ -89,10 +89,16 @@ function addEventToAddButtons(idx, newList) {
   let inputsOption = document.querySelectorAll(".inputs-options");
 
   addButtons[idx].addEventListener("click", function () {
-    loadItems(newList, [inputsOption[idx].value]);
-    inputsOption[idx].value = ''
+    let newItemText = inputsOption[idx].value;
+    if (newItemText.trim() === "") {
+      alert("Enter something before adding");
+      return;
+    }
+    arrayOfLists[idx].push(newItemText);
+    loadItems(newList, arrayOfLists[idx], idx);
+    inputsOption[idx].value = "";
+    console.log(arrayOfLists[idx]);
   });
-  return addButtons;
 }
 
 function onAddLists(arrayOfArrays) {
@@ -100,7 +106,7 @@ function onAddLists(arrayOfArrays) {
     let containerList = createContainerLists();
     createH2(idx, containerList);
     let newList = createList(containerList);
-    loadItems(newList, items);
+    loadItems(newList, items, idx);
     let containerInputs = createContainerInputs(containerList);
     createInputText(idx, containerInputs);
     createAddButton(containerInputs);
@@ -115,11 +121,19 @@ function darkMode() {
   lightDarkButton.addEventListener("click", function () {
     lightDarkButton.classList.toggle("blackChange");
     body.classList.toggle("darkBody");
-    lists.classList.toggle("darkUl");
+    for (let list of lists) {
+      list.classList.toggle("darkUl");
+    }
   });
 }
 
 window.addEventListener("load", function () {
   onAddLists(arrayOfLists);
   darkMode();
+  // if (localStorage.getItem('preference') && localStorage.getItem('preference') === 'dark' ) {
+  //   body.classList.add('darkBody')
+  // } else {
+  //   localStorage.setItem('preference', 'dark')
+  //   body.classList.add('darkBody')
+  // }
 });
