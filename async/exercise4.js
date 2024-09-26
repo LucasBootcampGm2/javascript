@@ -26,7 +26,7 @@ function assemblePart(part, callback) {
       callback(`Error: failed to assemble ${part}`, null)
     } else {
       console.log(`${part} assembled`)
-      callback(null)
+      callback(null, part)
     }
   }, 3000)
 }
@@ -34,31 +34,28 @@ function assemblePart(part, callback) {
 function handleError(err) {
   if (err) {
     console.error(err)
-    return
+    return true 
   }
+  return false 
 }
 
 downloadAndReadManuals("chip", (err, part) => {
-  handleError(err)
+  if (handleError(err)) return 
 
   assemblePart(part, (err) => {
-    handleError(err)
-
-    console.log(`Process for ${part} completed.`)
+    if (handleError(err)) return 
 
     downloadAndReadManuals("glass", (err, part) => {
-      handleError(err)
+      if (handleError(err)) return 
 
       assemblePart(part, (err) => {
-        handleError(err)
-
-        console.log(`Process for ${part} completed.`)
+        if (handleError(err)) return 
 
         downloadAndReadManuals("camera", (err, part) => {
-          handleError(err)
+          if (handleError(err)) return 
 
           assemblePart(part, (err) => {
-            handleError(err)
+            if (handleError(err)) return 
 
             console.log(`All parts assembled successfully.`)
           })

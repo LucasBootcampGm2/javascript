@@ -19,8 +19,9 @@ function assembleVerification() {
 function handleError(err) {
   if (err) {
     console.error(err)
-    return
+    return true
   }
+  return false
 }
 
 function assemblePart(part, time, callback) {
@@ -28,7 +29,7 @@ function assemblePart(part, time, callback) {
 
   setTimeout(() => {
     if (assembleVerification()) {
-      callback(`Error: failed to assemble ${part}`, part)
+      callback(`Error: failed to assemble ${part}`, null)
     } else {
       console.log(`${part} assembled`)
       callback(null, part)
@@ -37,28 +38,28 @@ function assemblePart(part, time, callback) {
 }
 
 downloadAndReadManuals("Glass", (err, part) => {
-  handleError(err)
+  if (handleError(err)) return
 
   assemblePart(part, 3000, (err) => {
-    handleError(err)
+    if (handleError(err)) return
 
     downloadAndReadManuals("Camera", (err, part) => {
-      handleError(err)
+      if (handleError(err)) return
 
       assemblePart(part, 5000, (err) => {
-        handleError(err)
+        if (handleError(err)) return
 
         downloadAndReadManuals("Chip", (err, part) => {
-          handleError(err)
+          if (handleError(err)) return
 
           assemblePart(part, 6000, (err) => {
-            handleError(err)
+            if (handleError(err)) return
 
             downloadAndReadManuals("Microphone", (err, part) => {
-              handleError(err)
+              if (handleError(err)) return
 
               assemblePart(part, 9000, (err) => {
-                handleError(err)
+                if (handleError(err)) return
               })
             })
           })
