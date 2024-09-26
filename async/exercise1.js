@@ -1,30 +1,19 @@
-function assembleChip(callback) {
+function assemblePart(part, callback) {
+  console.log(`Assembling ${part}...`)
   setTimeout(() => {
-    console.log("Assembling chip...")
-    callback()
-  }, 3000)
-}
-function assembleCamera(callback) {
-  setTimeout(() => {
-    console.log("Assembling camera...")
-    callback()
-  }, 3000)
-}
-function assembleGlass(callback) {
-  setTimeout(() => {
-    console.log("Assembling glass...")
-    callback()
+    console.log(`${part} assembled...`)
+    callback(part)
   }, 3000)
 }
 
-function assembleParts(callback1, callback2, callback3) {
-  callback1(() => {
-    callback2(() => {
-      callback3(() => {
+function assembleAll() {
+  assemblePart("chip", () => {
+    assemblePart("camera", () => {
+      assemblePart("glass", () => {
         console.log("All parts assembled")
       })
     })
   })
 }
 
-assembleParts(assembleChip, assembleGlass, assembleCamera)
+assembleAll()
