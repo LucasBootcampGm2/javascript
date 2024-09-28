@@ -1,5 +1,5 @@
 function assembler(part, time) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     console.log(`Assembling ${part}...`)
     setTimeout(() => {
       console.log(`${part} assembled`)
@@ -7,7 +7,6 @@ function assembler(part, time) {
     }, time)
   })
 }
-assembler()
-  .then("chip", 3000, () => {})
-  .then("camera", 5000, () => {})
-  .then("glass", 2000, () => {})
+assembler("chip", 3000)
+  .then(() => assembler("glass", 1000))
+  .then(() => assembler("camera", 5000))
