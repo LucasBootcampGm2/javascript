@@ -1,19 +1,50 @@
-function newCalculation(num) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log(`Hola numero: ${num}`)
-      reject(num)
-    }, 3000)
+function hireSomeone() {
+  return new Promise((resolve) => {
+    const userObject = {}
+    resolve(userObject)
   })
 }
 
-async function okey(num) {
+async function askName(name) {
   try {
-    const numMessage = (await newCalculation(num)) * 10
-    console.log(numMessage)
+    const userObject = await hireSomeone()
+    console.log("What's your name?")
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(`My name is ${name}`)
+        userObject.name = name
+        resolve(userObject)
+      }, 2000)
+    })
   } catch (error) {
-    console.log("Hubo un error: ", error)
+    console.log("What's your name?")
+    console.error("Ai no spiken ingles")
   }
 }
 
-okey(10)
+async function askGoals(name, goal) {
+  try {
+    const userObject = await askName(name)
+
+    console.log("What is your short term goal?")
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(`My short term goal is ${goal}`)
+        console.log(`Welcome, new GM2 brother, ${userObject.name}`)
+        userObject.goal = goal
+        resolve(userObject)
+      }, 2000)
+    })
+  } catch (error) {
+    console.error("No entender ingles")
+  }
+}
+
+askGoals(
+  "Lucas",
+  "work at GM2 while I study so I can be the best version of myself and take off as a professional."
+).then((result) => {
+  console.log("Final user object:", result)
+})
