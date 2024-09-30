@@ -1,0 +1,46 @@
+body {
+  box-sizing: border-box;
+  color: white;
+  margin: 0;
+}
+
+:root {
+  background-color: #000000e8;
+}
+
+.header {
+  text-align: center;
+  padding: 30px;
+}
+
+#main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.h2 {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  padding: 30px;
+  background-color: #252f5d;
+  width: 60%;
+  border-radius: 15px;
+  box-shadow: 0 0 5px 0 #00c2ff;
+}
+
+.random-span {
+  padding: 10px 30px;
+  background-color: #171717;
+}
+
+#random-button {
+  padding: 5px 15px;
+}
