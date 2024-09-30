@@ -133,15 +133,11 @@ function updateLoadingText(text) {
 
 function updateRandomSpan(randomNum) {
   return new Promise((resolve) => {
-    let randomSpan = document.querySelector(".random-span")
-    randomSpan.textContent = randomNum
-    resolve()
-  })
-}
-
-function wait(time) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time)
+    setTimeout(() => {
+      let randomSpan = document.querySelector(".random-span")
+      randomSpan.textContent = randomNum
+      resolve()
+    }, 3000)
   })
 }
 
@@ -151,7 +147,6 @@ window.addEventListener("load", function () {
       button.addEventListener("click", () => {
         updateLoadingText("Generating random num...")
           .then(() => createRandomNum())
-          .then((randomNum) => wait(3000).then(() => randomNum))
           .then((randomNum) => updateRandomSpan(randomNum))
           .then(() => updateLoadingText("Random number generated!"))
           .catch((error) => {
