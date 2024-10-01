@@ -8,7 +8,7 @@ const loading = document.getElementById("loading")
 loading.classList.remove("hidden")
 
 const selectRol = document.getElementById("select-rol")
-const differentRol = new Set()
+const inputName = document.getElementById("input-name")
 
 function filterByRol(rol) {
   const allUsers = document.querySelectorAll(".tr")
@@ -23,16 +23,45 @@ function filterByRol(rol) {
 }
 
 function getRols(data) {
-  data.forEach((user) => {
-    user.roles.forEach((rol) => {
-      if (!differentRol.has(rol)) {
-        differentRol.add(rol)
-        let newOption = document.createElement("option")
-        newOption.textContent = rol
-        newOption.value = rol
-        selectRol.append(newOption)
-      }
+  return new Promise((resolve) => {
+    const differentRol = new Set()
+    data.forEach((user) => {
+      user.roles.forEach((rol) => {
+        if (!differentRol.has(rol)) {
+          differentRol.add(rol)
+        }
+      })
     })
+    resolve(differentRol)
+  })
+}
+
+async function addSelectRolOptions(data) {
+  try {
+    const rols = await getRols(data)
+    const selectRol = document.getElementById("select-rol")
+
+    rols.forEach((rol) => {
+      let newOption = document.createElement("option")
+      newOption.textContent = rol
+      newOption.value = rol
+      selectRol.append(newOption)
+    })
+  } catch {}
+}
+
+function filterByName(name) {
+  const allUsers = document.querySelectorAll(".tr")
+  allUsers.forEach((user) => {
+    const userName = user.children[1]
+    if (
+      name === "" ||
+      userName.textContent.toLowerCase().includes(name.toLowerCase())
+    ) {
+      user.style.display = "table-row"
+    } else {
+      user.style.display = "none"
+    }
   })
 }
 
@@ -63,7 +92,7 @@ function makeAFetch(url) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      getRols(data)
+      addSelectRolOptions(data)
       createTable(data)
       loading.classList.add("hidden")
     })
@@ -81,5 +110,9 @@ window.addEventListener("load", () => {
 
   selectRol.addEventListener("change", (event) => {
     filterByRol(event.target.value)
+  })
+
+  inputName.addEventListener("input", (event) => {
+    filterByName(event.target.value)
   })
 })

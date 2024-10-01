@@ -18,6 +18,14 @@ h1 {
   font-size: 2.75em;
 }
 
+.container-filters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+}
+
 #users-table {
   width: 100%;
   border-collapse: collapse;
