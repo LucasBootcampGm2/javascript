@@ -1,46 +1,57 @@
 body {
   box-sizing: border-box;
-  color: white;
   margin: 0;
-}
-
-:root {
-  background-color: #000000e8;
-}
-
-.header {
-  text-align: center;
-  padding: 30px;
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
 }
 
 #main {
+  text-align: center;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  gap: 30px;
+  padding: 30px 15px;
 }
 
-.h2 {
+h1 {
   margin: 0;
 }
 
-.container {
+.pokemon-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.card {
+  padding: 10px 20px;
+  width: 160px;
   text-align: center;
-  padding: 30px;
-  background-color: #252f5d;
-  width: 60%;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px white;
+  color: white;
+}
+
+.card-img {
+  width: 100px;
+  height: 100px;
+}
+
+.container-types {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.type-badge {
+  padding: 6px;
   border-radius: 15px;
-  box-shadow: 0 0 5px 0 #00c2ff;
-}
-
-.random-span {
-  padding: 10px 30px;
-  background-color: #171717;
-}
-
-#random-button {
-  padding: 5px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 2px 1px #71714b;
 }
