@@ -47,7 +47,9 @@ async function addSelectRolOptions(data) {
       newOption.value = rol
       selectRol.append(newOption)
     })
-  } catch {}
+  } catch (err) {
+    console.error("Error: ", err)
+  }
 }
 
 function filterByName(name) {
@@ -89,27 +91,10 @@ function createTable(data) {
 }
 
 function makeAFetch(url) {
-  loading.classList.remove("hidden")
-
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      addSelectRolOptions(data)
-      createTable(data)
-      loading.classList.add("hidden")
-    })
-    .catch((error) => {
-      console.error(
-        "There has been a problem with your fetch operation:",
-        error
-      )
-      loading.classList.add("hidden")
-    })
+  return fetch(url)
 }
 
-window.addEventListener("load", () => {
-  makeAFetch("https://643ecf8ec72fda4a0b01bc66.mockapi.io/api/v1/users")
-
+function addEventListenerToFilters() {
   selectRol.addEventListener("change", (event) => {
     filterByRol(event.target.value)
   })
@@ -117,4 +102,24 @@ window.addEventListener("load", () => {
   inputName.addEventListener("input", (event) => {
     filterByName(event.target.value)
   })
+}
+
+window.addEventListener("load", () => {
+  loading.classList.remove("hidden")
+
+  makeAFetch("https://643ecf8ec72fda4a0b01bc66.mockapi.io/api/v1/users")
+    .then((response) => response.json())
+    .then((data) => {
+      addSelectRolOptions(data)
+      createTable(data)
+      loading.classList.add("hidden")
+    })
+    .then(() => addEventListenerToFilters())
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      )
+      loading.classList.add("hidden")
+    })
 })
