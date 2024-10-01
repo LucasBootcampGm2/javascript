@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Promises</title>
+    <title>Users</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body id="body">
     <main id="main">
-      <h1>POKEMON</h1>
+      <h1>Users Table</h1>
+      <div id="loading" class="hidden">Loading users...</div>
+      <label for="select-rol">Filtrar por rol:</label>
+      <select id="select-rol">
+        <option value=""></option>
+      </select>
+      <table id="users-table">
+        <thead id="thead">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
     </main>
     <script src="fetch.js"></script>
   </body>

@@ -1,57 +1,51 @@
 body {
   box-sizing: border-box;
   margin: 0;
-  background-color: black;
+  background-color: #1c1c1c;
   color: white;
-  font-family: sans-serif;
 }
 
 #main {
-  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 30px 15px;
+  align-items: center;
+  padding: 30px;
+  gap: 15px;
 }
 
 h1 {
   margin: 0;
+  font-size: 2.75em;
 }
 
-.pokemon-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
+#users-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 5px 0 green;
+  border: 1px solid;
 }
 
-.card {
-  padding: 10px 20px;
-  width: 160px;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 0 5px 1px white;
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4caf50;
   color: white;
+  text-transform: uppercase;
 }
 
-.card-img {
-  width: 100px;
-  height: 100px;
+tr:hover {
+  background-color: #f1f1f1;
 }
 
-.container-types {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  flex-wrap: wrap;
+tr:nth-child(even) {
+  background-color: #3b3737;
 }
 
-.type-badge {
-  padding: 6px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-shadow: 2px 1px #71714b;
+.hidden {
+  display: none;
 }
