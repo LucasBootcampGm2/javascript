@@ -89,6 +89,8 @@ function createTable(data) {
 }
 
 function makeAFetch(url) {
+  loading.classList.remove("hidden")
+
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
