@@ -1,8 +1,20 @@
+const main = document.getElementById("main")
+const table = document.getElementById("users-table")
+main.append(table)
+
+const tbody = document.getElementById("tbody")
+
+const loading = document.getElementById("loading")
+loading.classList.remove("hidden")
+
+const selectRol = document.getElementById("select-rol")
+const differentRol = new Set()
+
 function filterByRol(rol) {
   const allUsers = document.querySelectorAll(".tr")
   allUsers.forEach((user) => {
     const userRols = user.getAttribute("rol").split(", ")
-    if (rol === "" || userRols.includes(rol)) {
+    if (rol === "All" || userRols.includes(rol)) {
       user.style.display = "table-row"
     } else {
       user.style.display = "none"
@@ -10,7 +22,7 @@ function filterByRol(rol) {
   })
 }
 
-function getRols(data, differentRol, selectRol) {
+function getRols(data) {
   data.forEach((user) => {
     user.roles.forEach((rol) => {
       if (!differentRol.has(rol)) {
@@ -24,7 +36,7 @@ function getRols(data, differentRol, selectRol) {
   })
 }
 
-function createTable(data, tbody) {
+function createTable(data) {
   data.forEach((user) => {
     let newTr = document.createElement("tr")
     newTr.setAttribute("rol", user.roles.join(", "))
@@ -47,24 +59,12 @@ function createTable(data, tbody) {
   })
 }
 
-window.addEventListener("load", () => {
-  const main = document.getElementById("main")
-  const table = document.getElementById("users-table")
-  main.append(table)
-
-  const tbody = document.getElementById("tbody")
-
-  const loading = document.getElementById("loading")
-  loading.classList.remove("hidden")
-
-  const selectRol = document.getElementById("select-rol")
-  const differentRol = new Set()
-
-  fetch("https://643ecf8ec72fda4a0b01bc66.mockapi.io/api/v1/users")
+function makeAFetch(url) {
+  fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      getRols(data, differentRol, selectRol)
-      createTable(data, tbody)
+      getRols(data)
+      createTable(data)
       loading.classList.add("hidden")
     })
     .catch((error) => {
@@ -74,6 +74,10 @@ window.addEventListener("load", () => {
       )
       loading.classList.add("hidden")
     })
+}
+
+window.addEventListener("load", () => {
+  makeAFetch("https://643ecf8ec72fda4a0b01bc66.mockapi.io/api/v1/users")
 
   selectRol.addEventListener("change", (event) => {
     filterByRol(event.target.value)
