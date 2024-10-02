@@ -50,7 +50,7 @@ async function assembleAll() {
     await assemblePart("camera", 3000)
     await assemblePart("glass", 4000)
   } catch (error) {
-    console.log("Error: ", error)
+    console.error("Error: ", error)
   }
 }
 

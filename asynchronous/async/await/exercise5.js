@@ -20,7 +20,7 @@ function readManuals(part) {
   })
 }
 
-function verificateAssemble() {
+function verificateAssemble(part) {
   return new Promise((resolve, reject) => {
     let num = Math.floor(Math.random() * 10 + 1)
     if (num <= 5) {
@@ -32,20 +32,16 @@ function verificateAssemble() {
 }
 
 async function assemblePart(part, time) {
-  try {
-    await downloadManuals(part)
-    await readManuals(part)
-    await verificateAssemble()
-    console.log(`Assembling ${part}...`)
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        console.log(`${part} assembled`)
-        resolve()
-      }, time)
-    })
-  } catch (error) {
-    console.error("Error: ", error)
-  }
+  await downloadManuals(part)
+  await readManuals(part)
+  await verificateAssemble(part)
+  console.log(`Assembling ${part}...`)
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(`${part} assembled`)
+      resolve()
+    }, time)
+  })
 }
 
 async function assembleAll() {
@@ -54,7 +50,7 @@ async function assembleAll() {
     await assemblePart("camera", 3000)
     await assemblePart("glass", 4000)
   } catch (error) {
-    console.log("Error: ", error)
+    console.error("Error: ", error)
   }
 }
 
