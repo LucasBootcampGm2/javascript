@@ -97,6 +97,8 @@ function Car(brand, model, maxSpeed, doors) {
 Car.prototype = Object.create(Vehicle.prototype);
 Car.prototype.constructor = Car;
 
+// Object.setPrototypeOf(Vehicle.prototype, Car.prototype)
+
 Car.prototype.openDoors = function () {
   console.log(`All ${this.doors} doors are open.`);
 };
@@ -108,6 +110,8 @@ function Motorbike(brand, model, maxSpeed, sideCar) {
 
 Motorbike.prototype = Object.create(Vehicle.prototype);
 Motorbike.prototype.constructor = Motorbike;
+
+// Object.setPrototypeOf(Vehicle.prototype, Motorbike.prototype)
 
 Motorbike.prototype.showSideCar = function () {
   if (this.sideCar) {
@@ -133,5 +137,4 @@ car1.compareSpeed(motorbike1);
 motorbike1.stop();
 car1.stop();
 
-
-// preguntar porque no funciona con el setPrototypeOf, cual es la diferencia?? 
+// preguntar porque no funciona con el setPrototypeOf, cual es la diferencia??
