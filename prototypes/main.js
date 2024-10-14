@@ -73,7 +73,7 @@ Vehicle.prototype.showInfo = function () {
   console.log(`Max Speed: ${this.maxSpeed}`);
 };
 
-Vehicle.prototype.compareSpeed = function (otherVehicle) {
+Vehicle.prototype.compareMaxSpeed = function (otherVehicle) {
   if (this.maxSpeed > otherVehicle.maxSpeed) {
     console.log(
       `${this.brand} ${this.model} is faster than ${otherVehicle.brand} ${otherVehicle.model}.`
@@ -85,6 +85,22 @@ Vehicle.prototype.compareSpeed = function (otherVehicle) {
   } else {
     console.log(
       `${this.brand} ${this.model} and ${otherVehicle.brand} ${otherVehicle.model} have the same max speed.`
+    );
+  }
+};
+
+Vehicle.prototype.compareCurrentSpeed = function (otherVehicle) {
+  if (this.currentSpeed > otherVehicle.currentSpeed) {
+    console.log(
+      `${this.brand} ${this.model} is going faster than ${otherVehicle.brand} ${otherVehicle.model}.`
+    );
+  } else if (this.currentSpeed < otherVehicle.currentSpeed) {
+    console.log(
+      `${otherVehicle.brand} ${otherVehicle.model} is going faster than ${this.brand} ${this.model}.`
+    );
+  } else {
+    console.log(
+      `${this.brand} ${this.model} and ${otherVehicle.brand} ${otherVehicle.model} have the same current speed.`
     );
   }
 };
@@ -124,10 +140,11 @@ motorbike1.showInfo();
 car1.openDoors();
 motorbike1.showSideCar();
 
-car1.accelerate(100);
-motorbike1.accelerate(80);
+car1.accelerate(80);
+motorbike1.accelerate(100);
 
-car1.compareSpeed(motorbike1);
+car1.compareCurrentSpeed(motorbike1);
+car1.compareMaxSpeed(motorbike1);
 motorbike1.stop();
 car1.stop();
 
