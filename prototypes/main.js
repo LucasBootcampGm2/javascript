@@ -94,10 +94,7 @@ function Car(brand, model, maxSpeed, doors) {
   this.doors = doors;
 }
 
-Car.prototype = Object.create(Vehicle.prototype);
-Car.prototype.constructor = Car;
-
-// Object.setPrototypeOf(Vehicle.prototype, Car.prototype)
+Object.setPrototypeOf(Car.prototype, Vehicle.prototype);
 
 Car.prototype.openDoors = function () {
   console.log(`All ${this.doors} doors are open.`);
@@ -108,10 +105,7 @@ function Motorbike(brand, model, maxSpeed, sideCar) {
   this.sideCar = sideCar;
 }
 
-Motorbike.prototype = Object.create(Vehicle.prototype);
-Motorbike.prototype.constructor = Motorbike;
-
-// Object.setPrototypeOf(Vehicle.prototype, Motorbike.prototype)
+Object.setPrototypeOf(Motorbike.prototype, Vehicle.prototype);
 
 Motorbike.prototype.showSideCar = function () {
   if (this.sideCar) {
