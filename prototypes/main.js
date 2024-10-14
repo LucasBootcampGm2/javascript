@@ -58,7 +58,14 @@ function Vehicle(brand, model, maxSpeed) {
 Vehicle.prototype.accelerate = function (speed) {
   this.currentSpeed += speed;
   console.log(
-    `The ${this.brand} ${this.model} is now going at ${this.currentSpeed} km/h.`
+    `${this.brand} ${this.model} accelerated and it is now going at ${this.currentSpeed} km/h.`
+  );
+};
+
+Vehicle.prototype.decrease = function (speed) {
+  this.currentSpeed -= speed;
+  console.log(
+    `${this.brand} ${this.model} speed decreased and it is now going at ${this.currentSpeed} km/h.`
   );
 };
 
@@ -71,6 +78,7 @@ Vehicle.prototype.showInfo = function () {
   console.log(`Brand: ${this.brand}`);
   console.log(`Model: ${this.model}`);
   console.log(`Max Speed: ${this.maxSpeed}`);
+  console.log(`Current Speed: ${this.currentSpeed}`);
 };
 
 Vehicle.prototype.compareMaxSpeed = function (otherVehicle) {
@@ -145,6 +153,12 @@ motorbike1.accelerate(100);
 
 car1.compareCurrentSpeed(motorbike1);
 car1.compareMaxSpeed(motorbike1);
+
+motorbike1.decrease(20);
+motorbike1.compareCurrentSpeed(car1);
+
+car1.decrease(20);
+
 motorbike1.stop();
 car1.stop();
 
