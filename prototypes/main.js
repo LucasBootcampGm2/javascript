@@ -56,14 +56,22 @@ function Vehicle(brand, model, maxSpeed) {
 }
 
 Vehicle.prototype.accelerate = function (speed) {
-  this.currentSpeed += speed;
+  if ((this.currentSpeed += speed > this.maxSpeed)) {
+    this.currentSpeed = this.maxSpeed;
+  } else {
+    this.currentSpeed += speed;
+  }
   console.log(
     `${this.brand} ${this.model} accelerated and it is now going at ${this.currentSpeed} km/h.`
   );
 };
 
 Vehicle.prototype.decrease = function (speed) {
-  this.currentSpeed -= speed;
+  if ((this.currentSpeed -= speed < 0)) {
+    this.currentSpeed -= 0;
+  } else {
+    this.currentSpeed -= speed;
+  }
   console.log(
     `${this.brand} ${this.model} speed decreased and it is now going at ${this.currentSpeed} km/h.`
   );
@@ -134,6 +142,16 @@ Car.prototype.openDoors = function () {
   console.log(`All ${this.doors} doors are open.`);
 };
 
+Car.prototype.cleanWindshield = function () {
+  return new Promise((resolve) => {
+    console.log(`Cleaning ${this.brand} ${this.model} with windshield`);
+    setTimeout(() => {
+      console.log(`${this.brand} ${this.model} cleaned`);
+      resolve();
+    }, 3000);
+  });
+};
+
 function Motorbike(brand, model, maxSpeed, sideCar) {
   Vehicle.call(this, brand, model, maxSpeed);
   this.sideCar = sideCar;
@@ -149,29 +167,40 @@ Motorbike.prototype.showSideCar = function () {
   }
 };
 
-const car1 = new Car("Audi", "R8", 300, 4);
-const motorbike1 = new Motorbike("Royal Enfield", "Custom Cruise", 200, true);
+window.addEventListener("load", async () => {
+  try {
+    const car1 = new Car("Audi", "R8", 300, 4);
+    const motorbike1 = new Motorbike(
+      "Royal Enfield",
+      "Custom Cruise",
+      200,
+      true
+    );
 
-car1.showInfo();
-motorbike1.showInfo();
+    car1.showInfo();
+    motorbike1.showInfo();
 
-car1.openDoors();
-motorbike1.showSideCar();
+    car1.openDoors();
+    motorbike1.showSideCar();
 
-car1.accelerate(80);
-motorbike1.accelerate(100);
+    await car1.cleanWindshield();
 
-car1.jumpOf()
+    car1.accelerate(80);
+    motorbike1.accelerate(100);
 
-car1.compareCurrentSpeed(motorbike1);
-car1.compareMaxSpeed(motorbike1);
+    car1.jumpOf();
 
-motorbike1.decrease(20);
-motorbike1.compareCurrentSpeed(car1);
+    car1.compareCurrentSpeed(motorbike1);
+    car1.compareMaxSpeed(motorbike1);
 
-car1.decrease(20);
+    motorbike1.decrease(20);
+    motorbike1.compareCurrentSpeed(car1);
 
-motorbike1.stop();
-car1.stop();
+    car1.decrease(20);
 
-// preguntar porque no funciona con el setPrototypeOf, cual es la diferencia??
+    motorbike1.stop();
+    car1.stop();
+  } catch (error) {
+    console.error("Error", error);
+  }
+});
