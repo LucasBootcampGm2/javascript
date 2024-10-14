@@ -113,6 +113,16 @@ Vehicle.prototype.compareCurrentSpeed = function (otherVehicle) {
   }
 };
 
+Vehicle.prototype.jumpOf = function () {
+  if (this.currentSpeed < 70) {
+    console.log(`You jumped to ${this.currentSpeed} but just took a few hits`);
+  } else if (this.currentSpeed === 70) {
+    console.log(`You jumped at ${this.currentSpeed} but you might survive`);
+  } else {
+    console.log(`You jumped at ${this.currentSpeed} and now your are dead`);
+  }
+};
+
 function Car(brand, model, maxSpeed, doors) {
   Vehicle.call(this, brand, model, maxSpeed);
   this.doors = doors;
@@ -150,6 +160,8 @@ motorbike1.showSideCar();
 
 car1.accelerate(80);
 motorbike1.accelerate(100);
+
+car1.jumpOf()
 
 car1.compareCurrentSpeed(motorbike1);
 car1.compareMaxSpeed(motorbike1);
