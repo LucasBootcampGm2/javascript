@@ -57,7 +57,9 @@ function Vehicle(brand, model, maxSpeed) {
 
 Vehicle.prototype.accelerate = function (speed) {
   this.currentSpeed += speed;
-  console.log(`The ${this.brand} ${this.model} is now going at ${this.currentSpeed} km/h.`);
+  console.log(
+    `The ${this.brand} ${this.model} is now going at ${this.currentSpeed} km/h.`
+  );
 };
 
 Vehicle.prototype.stop = function () {
@@ -66,23 +68,29 @@ Vehicle.prototype.stop = function () {
 };
 
 Vehicle.prototype.showInfo = function () {
-  console.log(`Brand: ${this.brand}`) 
+  console.log(`Brand: ${this.brand}`);
   console.log(`Model: ${this.model}`);
   console.log(`Max Speed: ${this.maxSpeed}`);
 };
 
 Vehicle.prototype.compareSpeed = function (otherVehicle) {
   if (this.maxSpeed > otherVehicle.maxSpeed) {
-    console.log(`${this.brand} ${this.model} is faster than ${otherVehicle.brand} ${otherVehicle.model}.`);
+    console.log(
+      `${this.brand} ${this.model} is faster than ${otherVehicle.brand} ${otherVehicle.model}.`
+    );
   } else if (this.maxSpeed < otherVehicle.maxSpeed) {
-    console.log(`${otherVehicle.brand} ${otherVehicle.model} is faster than ${this.brand} ${this.model}.`);
+    console.log(
+      `${otherVehicle.brand} ${otherVehicle.model} is faster than ${this.brand} ${this.model}.`
+    );
   } else {
-    console.log(`${this.brand} ${this.model} and ${otherVehicle.brand} ${otherVehicle.model} have the same max speed.`);
+    console.log(
+      `${this.brand} ${this.model} and ${otherVehicle.brand} ${otherVehicle.model} have the same max speed.`
+    );
   }
 };
 
 function Car(brand, model, maxSpeed, doors) {
-  Vehicle.call(this, brand, model, maxSpeed); 
+  Vehicle.call(this, brand, model, maxSpeed);
   this.doors = doors;
 }
 
@@ -94,7 +102,7 @@ Car.prototype.openDoors = function () {
 };
 
 function Motorbike(brand, model, maxSpeed, sideCar) {
-  Vehicle.call(this, brand, model, maxSpeed); 
+  Vehicle.call(this, brand, model, maxSpeed);
   this.sideCar = sideCar;
 }
 
@@ -109,8 +117,8 @@ Motorbike.prototype.showSideCar = function () {
   }
 };
 
-const car1 = new Car('Audi', 'R8', 180, 4);
-const motorbike1 = new Motorbike('Royal Enfield', 'Custom Cruise', 200, true);
+const car1 = new Car("Audi", "R8", 300, 4);
+const motorbike1 = new Motorbike("Royal Enfield", "Custom Cruise", 200, true);
 
 car1.showInfo();
 motorbike1.showInfo();
@@ -118,7 +126,7 @@ motorbike1.showInfo();
 car1.openDoors();
 motorbike1.showSideCar();
 
-car1.accelerate(50);
+car1.accelerate(100);
 motorbike1.accelerate(80);
 
 car1.compareSpeed(motorbike1);
