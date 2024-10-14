@@ -132,3 +132,6 @@ motorbike1.accelerate(80);
 car1.compareSpeed(motorbike1);
 motorbike1.stop();
 car1.stop();
+
+
+// preguntar porque no funciona con el setPrototypeOf, cual es la diferencia?? 
