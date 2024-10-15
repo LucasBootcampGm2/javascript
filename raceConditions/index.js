@@ -47,17 +47,6 @@
 //   });
 // }
 
-// function purchaseTickets(){
-//     try {
-//         for await (let i = 0; i < array.length; i++) {
-//             await buyTickets(array[i].tickets,array[i].user)
-
-//         }
-//     } catch (error) {
-
-//     }
-// }
-
 // async function purchaseTickets() {
 //   try {
 //     await buyTickets(4, "Lucas");
