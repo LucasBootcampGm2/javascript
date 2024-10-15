@@ -77,7 +77,7 @@ const resultElement = document.getElementById("result");
 
 function buyTickets(quantity, user) {
   return new Promise((resolve, reject) => {
-    resultElement.innerText = `${user} is trying to buy ${quantity} tickets...`;
+    resultElement.innerText = `${user} is trying to buy ${quantity} ticket/s...`;
 
     if (availableTickets >= quantity) {
       setTimeout(() => {
@@ -85,10 +85,10 @@ function buyTickets(quantity, user) {
         console.log(
           `${user} bought ${quantity} tickets. Remaining: ${availableTickets}`
         );
-        resolve(`${user} successfully bought ${quantity} tickets!`);
+        resolve(`${user} successfully bought ${quantity} ticket/s!`);
       }, Math.random()* 4000);
     } else {
-      reject(`Sorry, ${user}. Only ${availableTickets} tickets are available.`);
+      reject(`Sorry, ${user}. Only ${availableTickets} ticket/s are available.`);
     }
   });
 }
