@@ -25,25 +25,27 @@
 // Implementar algún tipo de sincronización entre las solicitudes.
 
 // Alternativamente, puedes implementar promesas que aseguren que la actualización del stock sea atómica.
-let contador = 0;
-let lock = false;
-function incrementarContador() {
-  while (lock) {
-    true;
-  }
-  setTimeout(() => {
-    lock = true;
-    const valorActual = contador;
-    console.log(`Valor actual leído: ${valorActual}`);
+
+let availableTickets = 10;
+
+function buyTickets(quantity, user) {
+  console.log(`${user} is buying ${quantity} tickets...`);
+
+  if (availableTickets >= quantity) {
     setTimeout(() => {
-      const nuevoValor = valorActual + 1;
-      contador = nuevoValor;
-      console.log(`Nuevo valor almacenado: ${nuevoValor}`);
-      lock = false;
-    }, 200); 
-  }, Math.random() * 200);
+      availableTickets -= quantity;
+      console.log(
+        `User ${user} bought ${quantity} tickets. Remaining tickets: ${availableTickets}`
+      );
+    }, Math.random() * 100);
+  } else {
+    console.log(`User ${user} could not buy tickets. Not enough available.`);
+  }
 }
 
-incrementarContador();
-incrementarContador();
-console.log(`Operación finalizada, valor final del contador: ${contador}`);
+setTimeout(() => {
+  buyTickets(4, "Lucas");
+  buyTickets(3, "Franco");
+  buyTickets(2, "Matias");
+  buyTickets(3, "Seba");
+}, Math.random() * 100);
