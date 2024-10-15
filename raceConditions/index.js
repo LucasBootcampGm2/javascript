@@ -20,42 +20,103 @@
 //   buyTickets(3, "Seba");
 // }, Math.random() * 100);
 
+// let availableTickets = 10;
+
+// function buyTickets(quantity, user) {
+//   return new Promise((resolve, reject) => {
+//     console.log(`${user} is buying ${quantity} tickets...`);
+
+//     if (availableTickets > 0) {
+//       setTimeout(() => {
+//         if (availableTickets - quantity < 0) {
+//           reject(
+//             `They are only ${availableTickets} avialable so ${user} only buy that quantity`
+//           );
+//           availableTickets = 0;
+//         } else {
+//           availableTickets -= quantity;
+//           console.log(
+//             `User ${user} bought ${quantity} tickets. Remaining tickets: ${availableTickets}`
+//           );
+//           resolve();
+//         }
+//       }, Math.random() * 100);
+//     } else {
+//       reject(`User ${user} tried to buy tickets but there are not enough`);
+//     }
+//   });
+// }
+
+// function purchaseTickets(){
+//     try {
+//         for await (let i = 0; i < array.length; i++) {
+//             await buyTickets(array[i].tickets,array[i].user)
+
+//         }
+//     } catch (error) {
+
+//     }
+// }
+
+// async function purchaseTickets() {
+//   try {
+//     await buyTickets(4, "Lucas");
+//     await buyTickets(3, "Seba");
+//     await buyTickets(5, "Franco");
+//     await buyTickets(6, "Matias");
+//   } catch (error) {
+//     console.error("Error", error);
+//   }
+// }
+
+// purchaseTickets();
+
 let availableTickets = 10;
+let lock = false;
+const resultElement = document.getElementById("result");
 
 function buyTickets(quantity, user) {
   return new Promise((resolve, reject) => {
-    console.log(`${user} is buying ${quantity} tickets...`);
+    resultElement.innerText = `${user} is trying to buy ${quantity} tickets...`;
 
-    if (availableTickets > 0) {
+    if (availableTickets >= quantity) {
       setTimeout(() => {
-        if (availableTickets - quantity < 0) {
-          reject(
-            `They are only ${availableTickets} avialable so ${user} only buy that quantity`
-          );
-          availableTickets = 0;
-        } else {
-          availableTickets -= quantity;
-          console.log(
-            `User ${user} bought ${quantity} tickets. Remaining tickets: ${availableTickets}`
-          );
-          resolve();
-        }
-      }, Math.random() * 100);
+        availableTickets -= quantity;
+        console.log(
+          `${user} bought ${quantity} tickets. Remaining: ${availableTickets}`
+        );
+        resolve(`${user} successfully bought ${quantity} tickets!`);
+      }, Math.random()* 4000);
     } else {
-      reject(`User ${user} tried to buy tickets but there are not enough`);
+      reject(`Sorry, ${user}. Only ${availableTickets} tickets are available.`);
     }
   });
 }
 
-async function purchaseTickets() {
+async function handlePurchase(event) {
+  event.preventDefault();
+
+  if (lock) {
+    document.getElementById("result").innerText =
+      "Please wait. Another purchase is in progress.";
+    return;
+  }
+
+  lock = true;
+
+  const name = document.getElementById("name").value;
+  const quantity = parseInt(document.getElementById("quantity").value);
+
   try {
-    await buyTickets(4, "Lucas");
-    await buyTickets(3, "Seba");
-    await buyTickets(5, "Franco");
-    await buyTickets(6, "Matias");
+    const message = await buyTickets(quantity, name);
+    resultElement.innerText = message;
   } catch (error) {
-    console.error("Error", error);
+    resultElement.innerText = error;
+  } finally {
+    lock = false;
   }
 }
 
-purchaseTickets();
+document
+  .getElementById("ticket-form")
+  .addEventListener("submit", handlePurchase);
