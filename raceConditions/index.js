@@ -1,3 +1,5 @@
+// Race Condition
+
 // function buyTickets(quantity, user) {
 //   console.log(`${user} is buying ${quantity} tickets...`);
 
@@ -19,6 +21,8 @@
 //   buyTickets(2, "Matias");
 //   buyTickets(3, "Seba");
 // }, Math.random() * 100);
+
+// First Resolve
 
 // let availableTickets = 10;
 
@@ -60,6 +64,7 @@
 
 // purchaseTickets();
 
+// Final Resolve
 let availableTickets = 10;
 let lock = false;
 const resultElement = document.getElementById("result");
