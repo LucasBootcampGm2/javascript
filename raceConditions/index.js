@@ -86,9 +86,15 @@ function buyTickets(quantity, user) {
           `${user} bought ${quantity} tickets. Remaining: ${availableTickets}`
         );
         resolve(`${user} successfully bought ${quantity} ticket/s!`);
-      }, Math.random()* 4000);
+      }, Math.random() * 4000);
     } else {
-      reject(`Sorry, ${user}. Only ${availableTickets} ticket/s are available.`);
+      if (availableTickets > 0) {
+        reject(
+          `Sorry, ${user}. Only ${availableTickets} ticket/s are available.`
+        );
+      } else {
+        reject(`Sorry, tickets are sold out`);
+      }
     }
   });
 }
