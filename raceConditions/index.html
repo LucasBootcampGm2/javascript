@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket Purchase</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Buy Event Tickets</h1>
+    <form id="ticket-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required placeholder="Enter your name"/>
+      <label for="quantity">Tickets:</label>
+      <input type="number" id="quantity" min="1" required placeholder="How much do you want?"/>
+      <button type="submit">Buy Tickets</button>
+    </form>
+
+    <p id="result"></p>
+
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
