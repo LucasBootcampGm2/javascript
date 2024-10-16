@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promises</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div id="container-downloads"></div>
+      <div class="card">
+        <div class="card-header">
+          <h2>DONWLOADING ALL</h2>
+        </div>
+        <div class="card-content">
+            <i class="fa-solid fa-folder"></i>
+            <i>...</i>
+            <i class="fa-solid fa-globe"></i>
+        </div>
+      </div>
+      <div>
+        <p id="result"></p>
+      </div>
+      <div class="container-download-all">
+        <button id="download-all">Download-all</button>
+        <button id="promise-all">Promise.all()</button>
+        <button id="promise-any">Promise.any()</button>
+        <button id="promise-race">Promise.race()</button>
+        <button id="promise-settle">Promise.settle()</button>
+      </div>
+    </main>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>

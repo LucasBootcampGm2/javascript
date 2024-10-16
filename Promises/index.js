@@ -1,111 +1,161 @@
-// Ejercicio: Simulación de Descargas de Archivos
-// Contexto:
-// Estás desarrollando una aplicación para gestionar descargas de archivos. Cada archivo puede tardar un tiempo variable en descargarse debido a factores como el tamaño del archivo y la velocidad de la conexión. En algunos casos, las descargas pueden fallar debido a problemas de red. Tu tarea es simular estas descargas utilizando promesas y proporcionar diferentes tipos de reportes basados en las funciones Promise.all, Promise.allSettled, Promise.any, y Promise.race.
-// Requerimientos:
-// Implementa una clase llamada FileDownload, que simule la descarga de un archivo.
-// Cada instancia de FileDownload tendrá un nombre y un tamaño (en MB). El tiempo de descarga será simulado usando setTimeout, y dependerá del tamaño del archivo.
-// Usa las promesas Promise.all, Promise.allSettled, Promise.any, y Promise.race para generar diferentes resultados de las descargas.
-// Tareas:
-// Crear la clase FileDownload:
-// La clase debe tener un constructor que acepte un nombre y un tamaño de archivo.
-// Debe tener un método download() que simule la descarga del archivo, devolviendo una promesa que se resuelva cuando la descarga haya finalizado.
-
-class FileDownload {
-  constructor(name, size) {
-    this.name = name;
-    this.size = size;
+class FileDownloader {
+  constructor(container, downloadAllBtn, buttons, resultDisplay) {
+    this.container = container;
+    this.downloadAllBtn = downloadAllBtn;
+    this.buttons = buttons;
+    this.resultDisplay = resultDisplay;
+    this.promises = [];
   }
 
-  download(random) {
+  async createHtmlFiles() {
+    const files = [
+      { name: "Lucas", mb: 300 },
+      { name: "Jorge", mb: 300 },
+      { name: "Matias", mb: 300 },
+    ];
+
+    files.forEach((file) => {
+      const containerIndividual = document.createElement("div");
+      containerIndividual.classList.add("individual-download");
+
+      const name = document.createElement("span");
+      name.textContent = file.name;
+      containerIndividual.append(name);
+
+      const mb = document.createElement("span");
+      mb.textContent = `${file.mb} MB`;
+      containerIndividual.append(mb);
+
+      containerIndividual.innerHTML +=
+        '<i class="fa-solid fa-download icon"></i>';
+      this.container.append(containerIndividual);
+
+      this.promises.push(
+        new Promise((resolve, reject) => {
+          const random = Math.floor(Math.random() * 10);
+          random >= 5
+            ? resolve(`${file.name} downloaded successfully`)
+            : reject(`${file.name} download failed`);
+        })
+      );
+    });
+
+    return this.promises;
+  }
+
+  downloadIndividual() {
     return new Promise((resolve, reject) => {
-      console.log("Downloading file...");
-
-      setTimeout(() => {
-        if (random >= 3) {
-          console.log(`Succesful download ${this.name}`);
-          resolve(this.name);
-        } else {
-          console.log(`Failed download of ${this.name}`);
-
-          reject(this.name);
-        }
-      }, this.size * 2);
+      const random = Math.floor(Math.random() * 10);
+      random >= 5 ? resolve("File downloaded") : reject("Download failed");
     });
   }
 
-  simulateNetworkIssues() {
-    return Math.floor(Math.random() * 10);
+  showDownloadAllCard() {
+    this.downloadAllBtn.addEventListener("click", () => {
+      document.querySelector(".card").style.display = "flex";
+      this.container.style.display = "none";
+      this.downloadAllBtn.style.display = "none";
+      this.buttons.forEach((btn) => (btn.style.display = "flex"));
+    });
+  }
+
+  async handlePromises() {
+    try {
+      const promises = await this.createHtmlFiles();
+
+      this.buttons.forEach((button) => {
+        button.addEventListener("click", async () => {
+          const action = button.id;
+          let promiseAction;
+
+          switch (action) {
+            case "promise-all":
+              promiseAction = Promise.all(promises)
+                .then((result) => {
+                  this.resultDisplay.innerHTML =
+                    "All downloads completed: " + JSON.stringify(result);
+                })
+                .catch(() => {
+                  this.resultDisplay.innerHTML =
+                    "At least one download failed.";
+                });
+              break;
+
+            case "promise-any":
+              promiseAction = Promise.any(promises)
+                .then((result) => {
+                  this.resultDisplay.innerHTML =
+                    "Successful download found: " + result;
+                })
+                .catch(() => {
+                  this.resultDisplay.innerHTML = "All downloads failed.";
+                });
+              break;
+
+            case "promise-settle":
+              promiseAction = Promise.allSettled(promises).then((results) => {
+                const formattedResults = results.map(
+                  (res) => `${res.status}: ${res.value || res.reason}`
+                );
+                this.resultDisplay.innerHTML = formattedResults.join("<br>");
+              });
+              break;
+
+            case "promise-race":
+              promiseAction = Promise.race(promises)
+                .then((result) => {
+                  this.resultDisplay.innerHTML =
+                    "First completed promise: " + result;
+                })
+                .catch((error) => {
+                  this.resultDisplay.innerHTML =
+                    "First promise failed: " + error;
+                });
+              break;
+          }
+        });
+      });
+    } catch (error) {
+      console.error("Error handling promises:", error);
+    }
   }
 }
 
-// Simular varias descargas:
-// Instancia varios archivos y haz que empiecen la descarga al mismo tiempo.
+function clickDownloadIcon() {
+  const icons = document.querySelectorAll(".fa-download");
 
-const file1 = new FileDownload("File 1", 200);
-const file2 = new FileDownload("File 2", 2000);
-const file3 = new FileDownload("File 3", 1000);
-
-// Implementa lo siguiente:
-// Promise.all: Verifica cuánto tiempo toman todos los archivos en descargarse exitosamente.
-
-const files = [file1, file2, file3];
-
-Promise.all([
-    file1.download(FileDownload.simulateNetworkIssues()),
-    file2.download(FileDownload.simulateNetworkIssues()),
-    file3.download(FileDownload.simulateNetworkIssues()),
-  ])
-  .then(() => {
-    let time = 0;
-    files.forEach((file) => {
-      console.log(`${file.name} takes ${file.size * 2} to download`);
-      time += file.size * 2;
+  icons.forEach((icon) => {
+    icon.addEventListener("click", async () => {
+      try {
+        const resultMessage = await new FileDownloader().downloadIndividual();
+        icon.parentElement.remove();
+        document.getElementById("result").innerHTML = resultMessage;
+      } catch (error) {
+        document.getElementById("result").innerHTML = error;
+      }
     });
-    console.log(`It takes ${time} for all files to download successfully.`);
-  })
-  .catch((error) => {
-    console.log("Error", error);
   });
+}
 
-// Promise.allSettled: Ve cuáles descargas se completaron y cuáles fallaron.
+window.addEventListener("load", () => {
+  const container = document.getElementById("container-downloads");
+  const downloadAllBtn = document.getElementById("download-all");
+  const promiseButtons = [
+    document.getElementById("promise-all"),
+    document.getElementById("promise-any"),
+    document.getElementById("promise-settle"),
+    document.getElementById("promise-race"),
+  ];
+  const result = document.getElementById("result");
 
-Promise.allSettled([
-  file1.download(FileDownload.simulateNetworkIssues()),
-  file2.download(FileDownload.simulateNetworkIssues()),
-  file3.download(FileDownload.simulateNetworkIssues()),
-]).then((result) => console.log(result));
+  const downloader = new FileDownloader(
+    container,
+    downloadAllBtn,
+    promiseButtons,
+    result
+  );
+  downloader.showDownloadAllCard();
+  downloader.handlePromises();
 
-// Promise.any: Muestra cuál archivo se descargó primero exitosamente.
-
-Promise.any([
-  file1.download(FileDownload.simulateNetworkIssues()),
-  file2.download(FileDownload.simulateNetworkIssues()),
-  file3.download(FileDownload.simulateNetworkIssues()),
-]).then((result) => console.log(`${result} was the first file downloaded`));
-
-// Promise.race: Muestra el primer archivo que terminó de descargarse o falló.
-
-Promise.race([
-  file1.download(FileDownload.simulateNetworkIssues()),
-  file2.download(FileDownload.simulateNetworkIssues()),
-  file3.download(FileDownload.simulateNetworkIssues()),
-]).then((result) =>
-  console.log(
-    `${result} was the first file that finalize it download or fail it`
-  )
-);
-
-// Simular fallos en las descargas:
-// 	Simula que algunas descargas pueden fallar debido a problemas de conexión (rechazar la promesa).
-
-// [
-//     file1.download(FileDownload.simulateNetworkIssues()),
-//     file2.download(FileDownload.simulateNetworkIssues()),
-//     file3.download(FileDownload.simulateNetworkIssues()),
-// ] I use FileDownload.simulateNetworkIssues() to return a random num that manage the promise
-
-// Objetivo del ejercicio
-// Practicar el uso de promesas en JavaScript, especialmente las funciones de promesas avanzadas.
-// Entender las diferencias entre Promise.all, Promise.allSettled, Promise.any, y Promise.race.
-// Crear y manipular clases.
-// Simular condiciones reales (como tiempos de descarga variables y fallos) para trabajar con concurrencia en JavaScript.
+  clickDownloadIcon();
+});
