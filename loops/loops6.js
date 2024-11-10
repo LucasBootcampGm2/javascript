@@ -13,19 +13,21 @@
 // 1 2 3 4 3 2 1
 // 1 2 3 4 5 4 3 2 1
 
-function generatePyramid(n) {
+const generatePyramid = (n) => {
   for (let i = 1; i <= n; i++) {
     let pyramid = "";
+
     for (let j = 1; j <= i; j++) {
       pyramid += j;
     }
+
     for (let k = i - 1; k >= 1; k--) {
       pyramid += k;
     }
 
     console.log(pyramid);
   }
-}
+};
 generatePyramid(5);
 
 // Desafío: Encuentra el Elemento Único
@@ -37,26 +39,27 @@ generatePyramid(5);
 // Escribe una función encontrarElementoUnico(numeros) que encuentre y devuelva el elemento que no tiene pareja.
 // Importante: Solo pueden usar el bucle for y maximo 2 if, de lo contrario, el ejercicio esta mal
 // Ejemplo:
-let nums = [8, 8, 2, 5, 5, 6, 6]
+const nums = [8, 8, 2, 5, 5, 6, 6];
 
-function findUniqueElement(array) {
-  for (let i = 0; i < array.length; i++) {
+const findUniqueElement = (array) => {
+  const arrayLength = array.length;
+  for (let i = 0; i < arrayLength; i++) {
     let isUnique = true;
-    for (let j = 0; j < array.length; j++) {
-        if (i !== j && array[i] === array[j]) {
-            isUnique = false;
-            break;
-        }
+    for (let j = 0; j < arrayLength; j++) {
+      if (i !== j && array[i] === array[j]) {
+        isUnique = false;
+        break;
+      }
     }
     if (isUnique) {
-        return array[i];
+      return array[i];
     }
   }
   return null;
-}
+};
 
-console.log(findUniqueElement(nums)); 
-
+const resultExcercise2 = findUniqueElement(nums);
+console.log(resultExcercise2);
 
 // Desafío: Crear un Array de Números en Escalera
 // Objetivo:
@@ -73,15 +76,15 @@ console.log(findUniqueElement(nums));
 //   [2, 2]
 //   [3, 3, 3]
 //   [4, 4, 4, 4]
-function createLadderAray(n) {
+const createLadderAray = (n) => {
   for (let i = 0; i < n; i++) {
     let ladder = [];
-    for (let j = 0 ; j <= i; j++) {
-      ladder[j] =  i+1
+    for (let j = 0; j <= i; j++) {
+      ladder[j] = i + 1;
     }
     console.log(ladder);
   }
-}
+};
 createLadderAray(4);
 
 // SISTEMA DE ESTUDIANTES
@@ -95,50 +98,50 @@ createLadderAray(4);
 // Calcule el valor total del inventario por cada categoría.
 // Filtre los productos con un valor total mayor al valor especificado.
 // Cree un objeto con el siguiente formato:
-
-let products = [
-  { name: 'Laptop', amount: 4, unitePrice: 1000, category: 'Electrónica' },
-  { name: 'Teclado', amount: 10, unitePrice: 50, category: 'Electrónica' },
-  { name: 'Mouse', amount: 20, unitePrice: 25, category: 'Electrónica' },
-  { name: 'Monitor', amount: 5, unitePrice: 200, category: 'Electrónica' },
-  { name: 'Silla', amount: 10, unitePrice: 150, category: 'Muebles' },
-  { name: 'Escritorio', amount: 5, unitePrice: 300, category: 'Muebles' }
+const productsArray = [
+  { name: "Laptop", amount: 4, unitPrice: 1000, category: "Electronics" },
+  { name: "Keyboard", amount: 10, unitPrice: 50, category: "Electronics" },
+  { name: "Mouse", amount: 20, unitPrice: 25, category: "Electronics" },
+  { name: "Monitor", amount: 5, unitPrice: 200, category: "Electronics" },
+  { name: "Chair", amount: 10, unitPrice: 150, category: "Furniture" },
+  { name: "Desk", amount: 5, unitPrice: 300, category: "Furniture" },
 ];
 
-function generateInventoryReport(products, minValue) {
+const generateInventoryReport = (array, minValue) => {
   let report = [];
   let groupedByCategory = {};
-  for (product of products) {
-      let { category, name, amount, unitePrice } = product;
-      let totalValue = amount * unitePrice;
 
-      if (!groupedByCategory[category]) {
-          groupedByCategory[category] = {
-              categoria: category,
-              productos: [],
-              valorTotalCategoria: 0
-          };
-      }
+  for (let product of array) {
+    let { category, name, amount, unitPrice } = product;
+    let totalValue = amount * unitPrice;
 
-      if (totalValue > minValue) {
-          groupedByCategory[category].productos.push({
-              nombre: name,
-              cantidad: amount,
-              valorTotal: totalValue
-          });
-          groupedByCategory[category].valorTotalCategoria += totalValue;
-      }
+    if (!groupedByCategory[category]) {
+      groupedByCategory[category] = {
+        category: category,
+        products: [],
+        totalCategoryValue: 0,
+      };
+    }
+
+    if (totalValue > minValue) {
+      groupedByCategory[category].products.push({
+        name: name,
+        quantity: amount,
+        totalValue: totalValue,
+      });
+      groupedByCategory[category].totalCategoryValue += totalValue;
+    }
   }
 
   for (let category in groupedByCategory) {
-      report.push(groupedByCategory[category]);
+    report.push(groupedByCategory[category]);
   }
 
   return report;
-}
+};
 
-let report = generateInventoryReport(products, 500);
-console.log(report);
+const resultExcercise3 = generateInventoryReport(productsArray, 500);
+console.log(...resultExcercise3);
 
 // Salida esperada:
 // [

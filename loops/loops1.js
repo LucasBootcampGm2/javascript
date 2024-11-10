@@ -1,120 +1,148 @@
 // Bootcamp 2024
 // Loops | Ejercicios básicos | While - Do While
 // 1. Crea una función sumarHastaLimite que reciba un número límite. Usa un bucle while para sumar números consecutivos (1, 2, 3,...) hasta que la suma alcance o supere el límite. Muestra el resultado en la consola.
-function sumUpToLimit(limitNum) {
-  let cont = 0
-  let sum = 0
+const sumUpToLimit = (limitNum) => {
+  let count = 0;
+  let sum = 0;
   while (sum < limitNum) {
-    sum = cont + 1 
-    cont++
-    console.log(sum);
+    sum += count;
+    count++;
   }
-  return `sumuptolimit`;
-}
-console.log(sumUpToLimit(10));
+  return `Sum up to limit: ${sum}`;
+};
+
+const resultExcercise1 = sumUpToLimit(10);
+console.log(resultExcercise1);
 
 // 2. Escribe una función contarPares que reciba un número n. Usa un bucle while para contar cuántos números pares hay entre 1 y n. Muestra el resultado en la consola.
-function countEven(n) {
-  let i = 1;
-  let even = 0;
-  while (i <= n) {
-    if (i % 2 == 0) {
-      even++;
+
+const countEvenNums = (n) => {
+  let evens = 0;
+  let count = n;
+  while (count > 0) {
+    if (count % 2 === 0) {
+      evens++;
+      console.log(count);
     }
-    i++;
+    count--;
   }
-  return `Count even ${even}`;
-}
-console.log(countEven(10));
+  return `There are ${evens} even nums between 1 and ${n}`;
+};
+
+const resultExcercise2 = countEvenNums(6);
+console.log(resultExcercise2);
 
 // 3. Crea una función multiplicar que reciba dos números a y b. Usa un bucle while para multiplicar a por b mediante sumas sucesivas. Muestra el resultado en la consola.
-function multiply(a, b) {
-  let c = a;
-  while (c != a * b) {
-    c += a;
+
+const multiply = (a, b) => {
+  const expectedResult = a * b;
+  let result = 0;
+  while (result < expectedResult) {
+    result += b;
   }
-  return c;
-}
-console.log(multiply(3, 6));
+  return `Result: ${result}`;
+};
+
+const resultExcercise3 = multiply(5, 5);
+console.log(resultExcercise3);
 
 // 4. Escribe una función mostrarImpares que reciba un número límite. Usa un bucle while para mostrar en la consola todos los números impares desde 1 hasta el límite.
-function showOdds(limitNum) {
-  let i = 1;
-  let odd = 0;
-  while (i < limitNum) {
-    if (i % 2 !== 0) {
-      odd++;
+
+const showOdds = (limitNum) => {
+  let count = 1;
+  let odds = 0;
+
+  while (count < limitNum) {
+    if (count % 2 !== 0) {
+      odds++;
+      console.log(count);
     }
-    i++;
+    count++;
   }
-  return `Count odds ${odd}`;
-}
-console.log(showOdds(10));
+
+  return `There are ${odds} odds between 1 and ${limitNum}`;
+};
+
+const resultExcercise4 = showOdds(10);
+console.log(resultExcercise4);
 
 // 5. Escribe una función calcularFactorial que reciba un número n. Usa un bucle while para calcular el factorial de n. Muestra el resultado en la consola.
-function calculateFactorial(n) {
-  let i = n - 1;
-  let result = n;
-  while (i !== 1) {
-    result *= i;
-    i--;
-  }
-  return result;
-}
-console.log(calculateFactorial(4));
 
-// 6. Crea una función cuentaRegresiva que reciba un número n. Usa un bucle do while para realizar una cuenta regresiva desde n hasta 1, mostrando cada número en la consola.
-function countDown(n) {
+const calculateFactorial = (n) => {
+  let count = n;
+  let factorial = 1;
+
+  while (count > 0) {
+    factorial *= count;
+    count--;
+  }
+
+  return `The factorial number of ${n} is ${factorial}`;
+};
+
+const resultExcercise5 = calculateFactorial(4);
+console.log(resultExcercise5);
+
+// // 6. Crea una función cuentaRegresiva que reciba un número n. Usa un bucle do while para realizar una cuenta regresiva desde n hasta 1, mostrando cada número en la consola.
+
+const countDown = (n) => {
   do {
     console.log(n);
-    n -= 1;
-  } while (n > 1);
-  return `Caboom`;
-}
-console.log(countDown(10));
+    n--;
+  } while (n >= 0);
 
-// 7. Escribe una función sumarDigitos que reciba un número n. Usa un bucle while para sumar todos los dígitos de n. Muestra el resultado en la consola.
-function sumDigits(n) {
+  return `Time out!`;
+};
+
+const resultExcercise6 = countDown(10);
+console.log(resultExcercise6);
+
+// // 7. Escribe una función sumarDigitos que reciba un número n. Usa un bucle while para sumar todos los dígitos de n. Muestra el resultado en la consola.
+
+const sumDigits = (n) => {
   let sum = 0;
+
   while (n > 0) {
     sum += n % 10;
     n = Math.floor(n / 10);
   }
+
   return sum;
-}
-console.log(sumDigits(223));
+};
 
-// 8. Escribe una función encontrarMayor que reciba un array de números. Usa un bucle while para encontrar y mostrar el mayor número en la consola.
-function findUper(array) {
-  let i = 1;
-  let upper = array[0];
-  while (i < array.length) {
-    if (array[i] > array[i - 1]) {
-      upper = array[i];
+const resultExcercise7 = sumDigits(213);
+console.log(resultExcercise7);
+
+// // 8. Escribe una función encontrarMayor que reciba un array de números. Usa un bucle while para encontrar y mostrar el mayor número en la consola.
+
+const findUper = (arrayOfNumbers) => {
+  const arrayLength = arrayOfNumbers.length;
+  let upperNum = 0;
+  let count = 0;
+
+  while (count < arrayLength) {
+    if (arrayOfNumbers[count] > upperNum) {
+      upperNum = arrayOfNumbers[count];
     }
-    i++;
+    count++;
   }
-  return `Upper is ${upper}`;
-}
-console.log(findUper([1, 3, 5, 6, 2]));
 
-// 9. Escribe un programa que use un bucle do while para contar y mostrar en la consola todos los números impares desde 1 hasta 20.
-// 10. Escribe un programa que use un bucle do while para contar y mostrar en la consola todos los números pares desde 1 hasta 20.
+  return `The uper num in this array of numbers is ${upperNum}`;
+};
 
-function countAndShowOddsOrEvens(evenOrOdd) {
-  let i = 0;
-  let odds = 0;
-  let evens = 0;
-  console.log(evenOrOdd);
-  do {
-    i++;
-    if (i % 2 == 0) {
-      evens++;
-    } else {
-      odds++;
-    }
-    console.log(`Odds ${odds}, evens ${evens}`);
-  } while (i < evenOrOdd);
-  return `We have ${odds} odds and ${evens} evens`;
-}
-console.log(countAndShowOddsOrEvens(12));
+const resultExcercise8 = findUper([1, 52, 23, 3, 56]);
+console.log(resultExcercise8);
+
+// // 9. Escribe un programa que use un bucle do while para contar y mostrar en la consola todos los números impares desde 1 hasta 20.
+// // 10. Escribe un programa que use un bucle do while para contar y mostrar en la consola todos los números pares desde 1 hasta 20.
+
+const countAndShowNumbers = (number) => {
+  if (number % 2 === 0) {
+    return countEvenNums(number);
+  } else {
+    return showOdds(number);
+  }
+};
+
+const resultExcercise9and10 = countAndShowNumbers(9);
+console.log(resultExcercise9and10);
